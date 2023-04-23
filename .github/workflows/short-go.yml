@@ -1,0 +1,13 @@
+name: CI golang
+
+on: [push, pull_request]
+
+jobs: 
+  runs-on: ubuntu-latest
+  steps:
+  - name: Merge Pull Request
+    uses: juliangruber/merge-pull-request-action@v1
+    with:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+      number: 1
+      method: squash 
