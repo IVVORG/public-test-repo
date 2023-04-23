@@ -3,7 +3,7 @@ name: CI golang
 on: [push, pull_request]
 
 jobs: 
-  runs-on: ubuntu-latest
+  sssssssss:	
   steps:
   - name: Merge Pull Request
     uses: juliangruber/merge-pull-request-action@v1
