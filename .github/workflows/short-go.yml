@@ -11,12 +11,15 @@ jobs:
       run: |
         echo "good one"
 
+    - name: Set GH token
+      if: github.event_name == 'pull_request'
+      env: 
+        GH_TOKEN: ${{ secrets.personal_token }}
 
     - name: Merge PR
       if: github.event_name == 'pull_request'
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/mergePR.sh | bash 
       env: 
-        GH_TOKEN: ${{ secrets.personal_token }}
         pr_number: ${{ github.event.number }}
 
 
