@@ -4,11 +4,16 @@ on: [push, pull_request]
 
 jobs: 
   build:
-    run: |
-      echo "good one"
-  squash_pr:
-    needs: build
-    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check PR
+      run: |
+        echo "good one"
+
+
+    - name: Merge PR
+      if: github.event_name == 'pull_request'
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/mergePR.sh | bash 
       env: 
         token: ${{ secrets.reporeading_token }}
