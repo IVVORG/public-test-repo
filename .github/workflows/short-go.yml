@@ -1,8 +1,6 @@
 name: CI golang
 
 on: [push, pull_request]
-env: 
-  GH_TOKEN: ${{ secrets.personal_token }}
 
 jobs: 
   build:
@@ -12,6 +10,8 @@ jobs:
     - name: Check PR
       run: |
         echo "good one"
+      env: 
+        GH_TOKEN: ${{ secrets.personal_token }}
 
     - name: Merge PR
       if: github.event_name == 'pull_request'
