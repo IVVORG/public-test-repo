@@ -15,7 +15,9 @@ jobs:
       env: 
         GH_TOKEN: ${{ github.token }}
         pr_number: ${{ github.event.number }}
-      run: gh pr merge https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }} --squash --admin
+      run: |
+        echo $GITHUB_REPOSITORY
+        gh pr merge https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }} --squash --admin
 
 
 
