@@ -18,6 +18,7 @@ jobs:
       run: |
         echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
         prname="https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }}"
+        echo "prname: $prname"
         gh pr merge $prname --squash --admin
 
 
