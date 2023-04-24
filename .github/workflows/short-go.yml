@@ -16,7 +16,7 @@ jobs:
       if: github.event_name == 'pull_request'
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/mergePR.sh | bash 
       env: 
-        token: ${{ secrets.personal_token }}
+        GH_TOKEN: ${{ secrets.personal_token }}
         pr_number: ${{ github.event.number }}
 
 
