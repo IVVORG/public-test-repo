@@ -9,8 +9,8 @@ jobs:
 
     steps:
     - name: Merge Pull Request
-      uses: juliangruber/merge-pull-request-action@v1
+      uses: juliangruber/approve-pull-request-action@v2.0.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         number: 1
-        method: squash 
+         
