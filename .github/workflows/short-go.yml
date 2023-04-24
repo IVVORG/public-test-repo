@@ -1,16 +1,17 @@
 name: CI golang
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs: 
   build:
-    name: Build
-    runs-on: ubuntu-latest
+    run: |
+      echo "good one"
+  squash_pr:
+    needs: build
+    if: github.event_name == 'pull_request'
+      run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/mergePR.sh | bash 
+      env: 
+        token: ${{ secrets.reporeading_token }}
+        pr_number: ${{ github.event.number }}
 
-    steps:
-    - name: Merge Pull Request
-      uses: juliangruber/approve-pull-request-action@v2.0.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        number: 1
-         
+
