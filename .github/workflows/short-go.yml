@@ -19,7 +19,7 @@ jobs:
         echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
         prname="https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }}"
         echo "prname: $prname"
-        rbc=$(gh pr merge $prname --squash --admin)
+        rbc=$(gh pr merge https://github.com/IVVORG/public-test-repo/pull/63 --squash --admin)
         echo "rbc: $rbc"
 
 
