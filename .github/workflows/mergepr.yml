@@ -1,0 +1,15 @@
+name: CD golang
+
+on:
+  workflow_call
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Approve Pull Request
+      uses: juliangruber/approve-pull-request-action@v2.0.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 72
