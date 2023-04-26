@@ -1,7 +1,6 @@
-name: CD golang
+name: CI golang
 
-on:
-  workflow_call
+on: [pull_request]
 
 jobs: 
   build:

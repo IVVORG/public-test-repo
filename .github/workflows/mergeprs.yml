@@ -13,10 +13,9 @@ jobs:
     - name: Merge PR
       env: 
         GH_TOKEN: ${{ github.token }}
-        pr_number: ${{ github.event.number }}
         repo: ${{ GITHUB.REPOSITORY }}
       run: |
-        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
-        echo "prname: $prname"
-        gh pr merge https://github.com/${{ env.repo }}/pull/72 --squash --admin
+        bash ./github/workflows/domergepr.sh
+
+        
 
