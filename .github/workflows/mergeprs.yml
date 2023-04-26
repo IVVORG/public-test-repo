@@ -1,7 +1,9 @@
-name: CD golang
+name: CI golang
 
 on:
-  workflow_call
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '2 * * * *'
 
 jobs: 
   build:
