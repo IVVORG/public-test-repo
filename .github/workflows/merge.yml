@@ -17,3 +17,5 @@ jobs:
           branch: 'main'
           delete-branch: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: 'main'
+
