@@ -15,13 +15,6 @@ adf
 sdv
 dfvsdf
 
-sdcvasdvasdfvasdfv
-regegerg
-fff
-sdfsdfsdf
-fff
-sdvfgasdgvaesdfrvrttttdgbfdsgtbhfgtbrrr
-
 rrrrr
 adrfgbsdfbsdfbsdfg
 b
