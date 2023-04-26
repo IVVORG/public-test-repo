@@ -9,7 +9,9 @@ jobs:
 
     steps:
     - name: Approve Pull Request
-      uses: juliangruber/approve-pull-request-action@v2.0.0
+      uses: juliangruber/merge-pull-request-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         number: 72
+        method: squash # merge rebase
+        repo: IVVORG/public-test-repo
