@@ -6,19 +6,11 @@ on:
 jobs:
   merge-pull-request:
     runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Merge pull request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          commit-message: 'Automatically merged pull request'
-          title: 'Automatically merged pull request'
-          delete-branch: true
-          branch: 'mybranch'
-          base: 'main'
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-
+  steps:
+    - name: Approve Pull Request
+      uses: juliangruber/merge-pull-request-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 81
+        method: squash # merge rebase
+        repo: ivvorg/public-test-repo # optional
