@@ -1,16 +1,13 @@
-name: CI golang
+name: CD golang
 
-on: [pull_request]
+on:
+  workflow_call
 
 jobs: 
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check PR
-      run: |
-        echo "good one"
-
     - name: Merge PR
       env: 
         GH_TOKEN: ${{ github.token }}
@@ -21,7 +18,5 @@ jobs:
         prname="https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }}"
         echo "prname: $prname"
         echo "repo: https://github.com/${{ env.repo }}/pull/${{ env.pr_number }}"
-        gh pr merge https://github.com/IVVORG/public-test-repo/pull/71 --merge --admin
-
-
+        gh pr merge https://github.com/${{ env.repo }}/pull/${{ env.pr_number }} --squash --admin
 
