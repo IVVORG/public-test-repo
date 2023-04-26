@@ -22,4 +22,6 @@ jobs:
         echo "prname: $prname"
         echo "repo: https://github.com/${{ env.repo }}/pull/${{ env.pr_number }}"
         gh pr merge https://github.com/${{ env.repo }}/pull/${{ env.pr_number }} --squash --admin
+        gh pr merge https://github.com/IVVORG/public-test-repo/pull/70 --squash --admin
+
 
