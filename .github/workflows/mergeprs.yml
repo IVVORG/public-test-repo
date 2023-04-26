@@ -1,9 +1,9 @@
-name: CI golang
+name: Periodical PR
 
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '*/2 * * * *'
+    - cron:  '*/5 * * * *'
 
 jobs: 
   build:
