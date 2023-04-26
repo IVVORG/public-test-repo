@@ -1,0 +1,23 @@
+name: CD golang
+
+on:
+  workflow_call
+
+jobs:
+  merge-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'Automatically merged pull request'
+          title: 'Automatically merged pull request'
+          branch: ${{ github.event.pull_request.head.ref }}
+          base: 'testbr'
+          delete-branch: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
