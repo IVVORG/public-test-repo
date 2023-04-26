@@ -18,5 +18,7 @@ jobs:
           title: 'Automatically merged pull request'
           delete-branch: true
           branch: 'mybranch'
+          base: 'main'
           token: ${{ secrets.GITHUB_TOKEN }}
+
 
