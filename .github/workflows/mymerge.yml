@@ -1,0 +1,22 @@
+name: CD golang
+
+on:
+  workflow_call
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Merge PR
+      env: 
+        GH_TOKEN: ${{ github.token }}
+        pr_number: ${{ github.event.number }}
+        repo: ${{ GITHUB.REPOSITORY }}
+      run: |
+        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+        prname="https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }}"
+        echo "prname: $prname"
+        echo "repo: https://github.com/${{ env.repo }}/pull/${{ env.pr_number }}"
+        gh pr merge https://github.com/${{ env.repo }}/pull/${{ env.pr_number }} --squash --admin
+
