@@ -15,7 +15,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
         repo: ${{ GITHUB.REPOSITORY }}
       run: |
-        bash ./github/workflows/domergepr.sh
+        bash domergepr.sh
 
         
 
