@@ -7,5 +7,4 @@ jobs:
     uses: ivvorg/public-test-repo/.github/workflows/check.yml@main
   call-workflow-merge:
     needs: call-workflow-check
-    uses: ivvorg/public-test-repo/.github/workflows/merge.yml@main
-
+    uses: ivvorg/public-test-repo/.github/workflows/mergepr.yml@main

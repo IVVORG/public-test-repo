@@ -1,0 +1,17 @@
+name: CD golang
+
+on:
+  workflow_call
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Approve Pull Request
+      uses: juliangruber/merge-pull-request-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 72
+        method: squash # merge rebase
+        repo: IVVORG/public-test-repo
