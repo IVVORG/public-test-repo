@@ -9,5 +9,6 @@ jobs:
     steps:
     - name: Check PR
       run: |
-        echo "good one"
+        echo "all is bad"
+        exit 1
 
