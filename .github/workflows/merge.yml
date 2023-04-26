@@ -6,7 +6,7 @@ on:
 jobs:
   merge-pull-request:
     runs-on: ubuntu-latest
-  steps:
+    steps:
     - name: Approve Pull Request
       uses: juliangruber/merge-pull-request-action@v1
       with:
