@@ -10,10 +10,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Merge pull request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           commit-message: 'Automatically merged pull request'
           title: 'Automatically merged pull request'
-          branch: 'main'
+          branch: ${{ github.event.pull_request.head.ref }}
           delete-branch: true
           token: ${{ secrets.GITHUB_TOKEN }}
+
