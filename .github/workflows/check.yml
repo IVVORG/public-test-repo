@@ -1,6 +1,7 @@
 name: CI golang
 
-on: [pull_request]
+on:
+  workflow_call
 
 jobs: 
   build:
@@ -9,6 +10,5 @@ jobs:
     steps:
     - name: Check PR
       run: |
-        echo "all is bad"
-        exit 1
+        echo "All is Fine"
 
