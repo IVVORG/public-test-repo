@@ -20,9 +20,6 @@ regegerg
 fff
 sdfsdfsdf
 
-wecqwerqergqerg
-ergqer
-
 sdvfgasdgvaesdfrv
 adrfgbsdfbsdfbsdfg
 b
