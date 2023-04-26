@@ -1,6 +1,6 @@
 name: CI golang
 
-on:[pull_request]
+on: [pull_request]
 
 jobs:
   call-workflow-check:
@@ -8,3 +8,4 @@ jobs:
   call-workflow-merge:
     needs: call-workflow-check
     uses: ivvorg/public-test-repo/.github/workflows/merge.yml@main
+
