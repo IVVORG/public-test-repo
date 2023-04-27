@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set environment variable
-        run: echo "export MY_TOKEN=${{ secrets.PERSONAL_TOKEN }}" >> $GITHUB_ENV
+        run: echo "export MYTOKEN=${{ secrets.PERSONAL_TOKEN }}" >> $GITHUB_ENV
       - name: Use environment variable
-        run: echo "My token is $MY_TOKEN"
+        run: echo "My token is $MYTOKEN"
