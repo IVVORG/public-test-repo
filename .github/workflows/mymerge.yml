@@ -1,7 +1,10 @@
-name: CD golang
+name: Merge PR1
 
 on:
-  workflow_call
+  workflow_call:
+    secrets:
+      personaltoken:
+        required: true
 
 jobs: 
   build:
@@ -10,13 +13,12 @@ jobs:
     steps:
     - name: Merge PR
       env: 
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ secrets.personaltoken }}
         pr_number: ${{ github.event.number }}
         repo: ${{ GITHUB.REPOSITORY }}
       run: |
-        echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+        echo "secrets.personaltoken: ${{ secrets.personaltoken }}"
         prname="https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.number }}"
-        echo "prname: $prname"
         echo "repo: https://github.com/${{ env.repo }}/pull/${{ env.pr_number }}"
-        gh pr merge https://github.com/${{ env.repo }}/pull/${{ env.pr_number }} --squash --admin
+        gh pr merge https://github.com/${{ env.repo }}/pull/${{ env.pr_number }} --squash
 
