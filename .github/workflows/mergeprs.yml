@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Merge PR
       env: 
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         repo: ${{ GITHUB.REPOSITORY }}
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/domergepr.sh | bash 
 
