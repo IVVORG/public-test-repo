@@ -1,4 +1,4 @@
-name: CI golang
+name: Check PR and Merge PR
 
 on:
   pull_request:
@@ -6,7 +6,9 @@ on:
 
 jobs:
   call-workflow-check:
-    uses: ivvorg/public-test-repo/.github/workflows/check.yml@main
+    uses: ivvorg/pub-demo/.github/workflows/check.yml@main
   call-workflow-merge:
     needs: call-workflow-check
-    uses: ivvorg/public-test-repo/.github/workflows/merge.yml@main
+    uses: ivvorg/pub-demo/.github/workflows/mymerge.yml@main
+    secrets:
+      personaltoken: ${{ secrets.PERSONAL_TOKEN }}

@@ -1,4 +1,4 @@
-name: CD golang
+name: Merge with peter-evans
 
 on:
   workflow_call

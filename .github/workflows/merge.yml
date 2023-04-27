@@ -1,4 +1,4 @@
-name: CD golang
+name: Merge with juliangruber
 
 on:
   workflow_call
@@ -11,6 +11,6 @@ jobs:
       uses: juliangruber/merge-pull-request-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        number: 81
+        number: 1
         method: squash # merge rebase
-        repo: ivvorg/public-test-repo # optional
+        repo: ivvorg/pub-demo # optional
