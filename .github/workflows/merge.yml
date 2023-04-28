@@ -1,9 +1,10 @@
-name: Periodical PR
+name: Merge PR
 
 on:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '*/5 * * * *'
+  workflow_call:
+    secrets:
+      personaltoken:
+        required: true
 
 jobs: 
   build:
@@ -16,6 +17,3 @@ jobs:
         token: ${{ secrets.PERSONAL_TOKEN }}
         repo: ${{ GITHUB.REPOSITORY }}
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/domergepr.sh | bash 
-
-        
-
