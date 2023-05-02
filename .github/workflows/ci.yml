@@ -5,8 +5,5 @@ on: [pull_request_target]
 jobs:
   call-workflow-check:
     uses: ivvorg/public-test-repo/.github/workflows/check.yml@main
-  call-workflow-merge:
-    needs: call-workflow-check
-    uses: ivvorg/public-test-repo/.github/workflows/merge.yml@main
-    secrets:
-      personaltoken: ${{ secrets.PERSONAL_TOKEN }}
+    with: 
+      ignore_bp3: false
