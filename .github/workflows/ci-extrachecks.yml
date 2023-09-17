@@ -1,0 +1,11 @@
+name: Merge PR
+
+on: workflow_call
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Vulnerability management
+      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/vulncheck.sh | bash
