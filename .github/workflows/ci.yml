@@ -8,7 +8,7 @@ jobs:
     with: 
       ignore_bp3: 'true'
   call-workflow-vulncheck:
-    needs: call-workflow-ci
+    needs: call-workflow-check
     uses: ivvorg/public-test-repo/.github/workflows/ci-extrachecks.yml@main
 
 
