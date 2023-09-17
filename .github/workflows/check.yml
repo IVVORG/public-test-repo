@@ -20,5 +20,5 @@ jobs:
     - name: Check PR false
       if: ${{ inputs.ignore_bp3 == 'false' }}
       run: |
-        echo "ignore_bp3 = false"
+        echo "ignore_bp3 = true"
 
