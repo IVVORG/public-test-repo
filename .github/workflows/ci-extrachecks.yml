@@ -8,4 +8,6 @@ jobs:
 
     steps:
     - name: Vulnerability management
-      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/vulncheck.sh | bash
+      run: |
+        go install golang.org/x/vuln/cmd/govulncheck@latest
+        govulncheck ./...
