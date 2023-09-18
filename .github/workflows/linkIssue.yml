@@ -3,6 +3,9 @@ name: Link issue to Milestone
 on:
   issues:
     types: [closed]
+    secrets:
+      personaltoken:
+        required: true
 
 jobs: 
   build:
