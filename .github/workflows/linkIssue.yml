@@ -1,0 +1,15 @@
+name: Link issue to Milestone
+
+on:
+  issues:
+    types: [closed]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: link
+      env: 
+        GH_TOKEN: ${{ secrets.personaltoken }}
+      run: voedger/voedger/.github/workflows/linkmilestone.sh | bash 
