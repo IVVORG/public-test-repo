@@ -15,9 +15,12 @@
   }
 
   # Get milestone list
+echo "1"
   milestones=$(gh api repos/${repo}/milestones --jq '.[] | .title')
+echo $milestones
   for milestone in $milestones; do
     goodml=$(isNext $milestone)
+    echo $milestone
     if [ $goodml -eq 1 ]
 #	gh issue edit issueNum --milestone ${milestone} --repo ${repo}
 echo "Found: $milestone"
