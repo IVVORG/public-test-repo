@@ -12,4 +12,4 @@ jobs:
     - name: link
       env: 
         GH_TOKEN: ${{ secrets.personaltoken }}
-      run: ivvorg/public-test-repo/.github/workflows/linkmilestone.sh | bash 
+      run: ivvorg/public-test-repo/linkmilestone.sh | bash 
