@@ -14,5 +14,5 @@ jobs:
         GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         repo: ${{ GITHUB.REPOSITORY }}
         issue: ${{ github.event.issue.number }}
-      run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/linkmilestone.sh | bash 
+      run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/linkmilestone2.sh | bash 
 
