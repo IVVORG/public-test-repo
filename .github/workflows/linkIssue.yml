@@ -3,9 +3,6 @@ name: Link issue to Milestone
 on:
   issues:
     types: [closed]
-    secrets:
-      personaltoken:
-        required: true
 
 jobs: 
   build:
@@ -14,6 +11,5 @@ jobs:
     steps:
     - name: link
       env: 
-        GH_TOKEN: ${{ secrets.personaltoken }}
-        token: ${{ secrets.personaltoken }}
+        GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/linkmilestone.sh | bash 
