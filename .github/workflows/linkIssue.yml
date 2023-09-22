@@ -16,7 +16,3 @@ jobs:
         issue: ${{ github.event.issue.number }}
       run: curl -s https://raw.githubusercontent.com/ivvist/ci-action/master/scripts/linkmilestone2.sh | bash 
 
-    - name: Display Error Message
-      if: failure()  # This step runs only if the previous step failed
-      run: |
-        echo "The Bash script encountered an error. See the logs for details."
