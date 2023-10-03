@@ -7,6 +7,7 @@ jobs:
     uses: ivvorg/public-test-repo/.github/workflows/check.yml@main
     with: 
       ignore_bp3: 'true'
+      commit_name: "${{ github.event.head_commit.message }} ${{ github.event.head_commit.id }}"      
   call-workflow-vulncheck:
     needs: call-workflow-check
     uses: ivvorg/public-test-repo/.github/workflows/ci-extrachecks.yml@main

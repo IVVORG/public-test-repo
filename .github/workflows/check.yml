@@ -6,8 +6,12 @@ on:
       ignore_bp3:
         required: false
         type: string
+      commit_name:
+        required: false
+        type: string
 
 jobs: 
+
   build:
     runs-on: ubuntu-latest
 
@@ -16,9 +20,11 @@ jobs:
       if: ${{ inputs.ignore_bp3 == 'true' }}
       run: |
         echo "ignore_bp3 = true"
+        echo "update voedger dependency '${{ inputs.commit_name }}'"
 
     - name: Check PR false
       if: ${{ inputs.ignore_bp3 == 'false' }}
       run: |
         echo "ignore_bp3 = true"
+        echo "update voedger dependency '${{ inputs.commit_name }}'"
 
