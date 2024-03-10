@@ -1,6 +1,6 @@
 name: Check PR and Merge PR
 
-on: [push]
+on: [pull_request]
 
 jobs:
   call-workflow-check:
