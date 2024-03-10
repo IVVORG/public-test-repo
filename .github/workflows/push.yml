@@ -82,5 +82,7 @@ jobs:
 
     - name: Commit files
       run: |
+        git config --local user.email "v.istratenko@heeus.io"
+        git config --local user.name "voedger-ci-robot"
         git add .
         git commit -a -m "voedger: ${{ inputs.commit_name }}"
