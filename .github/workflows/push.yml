@@ -84,17 +84,5 @@ jobs:
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
+        git add .
         git commit -a -m "voedger: ${{ inputs.commit_name }}"
-
-    - name: Push changes to pb3 - First attempt
-      id: pushBP1
-      continue-on-error: true	
-      if: ${{ (contains(github.repositoryUrl, 'voedger' ) || contains(github.repositoryUrl, 'untillpro' )) && (inputs.ignore_bp3 != 'true') &&
-        github.event_name == 'push' &&  (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }} 
-      uses: ad-m/github-push-action@master
-      with:
-        directory: ../../${{ github.event.repository.name }}/airs-bp3
-        repository: untillpro/airs-bp3
-        branch: "main"
-        github_token: ${{ secrets.personal_token }}
-
