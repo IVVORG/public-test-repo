@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   call-workflow-ci:
-    uses: ivvist/ci-action/.github/workflows/ci_reuse_go.yml@master
+    uses: untillpro/ci-action/.github/workflows/ci_reuse_go.yml@master
     with: 
       ignore_bp3: 'true'
       short_test: 'true'
