@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Checkout
+      uses: actions/checkout@v4
+
     - name: Set up Go
       uses: actions/setup-go@v5
       with:
         go-version: 'stable'
-
-    - name: Checkout
-      uses: actions/checkout@v4
 
     - name: Check pull request file size
       if: github.event_name == 'pull_request'
