@@ -5,11 +5,11 @@ on:
     types: [reopened]
 
 jobs: 
-  link:
+  unlink:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Unlink tissue from milestone
+    - name: Unlink issue from milestone
       env: 
         GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         repo: ${{ GITHUB.REPOSITORY }}
