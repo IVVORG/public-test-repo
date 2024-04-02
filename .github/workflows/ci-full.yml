@@ -3,12 +3,18 @@ name: Daily test suite
 on: [push]
 
 jobs:
-  build:
+  display-time:
+    # This job runs on the latest Ubuntu runner provided by GitHub Actions
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
-    - name: Show current time
-      run: date
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Show current time
+        run: |
+          echo "The current time is $(date)"
    	
   call-workflow-ci:
     uses: ivvorg/public-test-repo/.github/workflows/push.yml@main
