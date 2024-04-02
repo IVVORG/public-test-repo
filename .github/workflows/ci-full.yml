@@ -8,7 +8,7 @@ jobs:
 
     steps:
     - name: Show current time
-        run: date
+      run: date
    	
   call-workflow-ci:
     uses: ivvorg/public-test-repo/.github/workflows/push.yml@main
