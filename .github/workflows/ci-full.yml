@@ -3,9 +3,13 @@ name: Daily test suite
 on: [push]
 
 jobs:
-  current-time:
-    run: |
-       echo date
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Show current time
+      run: |
+        echo date
    	
   call-workflow-ci:
     uses: ivvorg/public-test-repo/.github/workflows/push.yml@main
