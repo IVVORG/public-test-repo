@@ -1,0 +1,33 @@
+name: Release every 2 weeks on Monday at 5 at the morning
+
+on: 
+  schedule:
+    - cron: '0 8:14 * * *'
+
+jobs:
+  
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Check week number
+      id: check_week
+      run: |
+        week_num=$(date +'%V')
+        declare -i wnum
+        wnum=$((10#${week_num}))
+        echo "Week number: $wnum"
+        if [ $((wnum % 2)) -eq 0 ]; then
+          echo "RUN_THIS_WEEK=true" >> $GITHUB_ENV
+        else
+          echo "RUN_THIS_WEEK=false" >> $GITHUB_ENV
+        fi
+
+    - name: Make release
+      if: env.RUN_THIS_WEEK == 'true'
+      run: |
+         echo 'Worked'
