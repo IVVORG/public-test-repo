@@ -2,7 +2,7 @@ name: Release every 2 weeks on Monday at 5 at the morning
 
 on: 
   schedule:
-    - cron: '17 8 * * *'
+    - cron: '31 7 * * *'
 
 jobs:
   
@@ -27,7 +27,12 @@ jobs:
           echo "RUN_THIS_WEEK=false" >> $GITHUB_ENV
         fi
 
-    - name: Make release
+    - name: Worked
       if: env.RUN_THIS_WEEK == 'true'
       run: |
          echo 'Worked'
+
+    - name: Not worked
+      if: env.RUN_THIS_WEEK == 'false'
+      run: |
+         echo 'Not Worked'
