@@ -1,7 +1,12 @@
-name: Show time
+name: Show Current Time
 
-on: [push]
+# This specifies when the workflow should run. In this case, it runs on every push to the main branch.
+on:
+  push:
+    branches:
+      - main
 
+# This is the job that will be executed. Jobs run in parallel by default.
 jobs:
   display-time:
     # This job runs on the latest Ubuntu runner provided by GitHub Actions
@@ -15,4 +20,3 @@ jobs:
       - name: Show current time
         run: |
           echo "The current time is $(date)"
-   	
