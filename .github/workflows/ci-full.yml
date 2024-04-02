@@ -3,6 +3,10 @@ name: Daily test suite
 on: [push]
 
 jobs:
+  current-time:
+    run: |
+       echo date
+   	
   call-workflow-ci:
     uses: ivvorg/public-test-repo/.github/workflows/push.yml@main
     with: 
