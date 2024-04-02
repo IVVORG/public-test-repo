@@ -2,7 +2,7 @@ name: Release every 2 weeks on Monday at 5 at the morning
 
 on: 
   schedule:
-    - cron: '0 8:16 * * *'
+    - cron: '17 8 * * *'
 
 jobs:
   
