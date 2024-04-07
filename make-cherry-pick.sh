@@ -19,6 +19,7 @@ for commit_hash in "${commit_hashes[@]}"; do
         echo "Error cherry-picking commit $commit_hash. Aborting."
         exit 1
     }
+    git pull
 done
 
 echo "Cherry-pick completed successfully."
