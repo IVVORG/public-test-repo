@@ -1,18 +1,33 @@
 #!/bin/bash
 
-# Check if a commit hash list was provided
-if [ "$#" -ne 1 ]; then
+# The input is a comma-separated list of commit hashes
+commit_hashes="$1"
+
+# Check if commit hashes were provided
+if [ -z "$commit_hashes" ]; then
     echo "Usage: $0 <comma-separated list of commit hashes>"
     exit 1
 fi
 
-# Split the comma-separated list into an array of commit hashes
-IFS=',' read -r -a commit_hashes <<< "$1"
+# Initialize an array to hold the sorted commit hashes
+declare -a sorted_commits
 
+# Loop through the hashes, get their commit dates, and sort them
+# Then read line by line into the array
+while IFS= read -r line; do
+    sorted_commits+=("$line")
+done < <(for commit in $commit_hashes; do
+    # Using %ci to get the commit date, you can also use %ct for UNIX timestamp
+    echo $(git show -s --format=%ci $commit) $commit
+done | sort | awk '{print $4}')
 
+# Now, you can use sorted_commits array as needed
+echo "Sorted commits:"
+printf "%s\n" "${sorted_commits[@]}"
 # Loop through the array and cherry-pick each commit from the "main" branch
-for commit_hash in "${commit_hashes[@]}"; do
+for commit_hash in "${sorted_commits[@]}"; do
     echo "Cherry-picking commit $commit_hash from main to rc..."
+    echo $(git show -s --format=%ci $commit_hash) $commit_hash	
     commit_hash=$(echo $commit_hash | tr -d ' ')
     git cherry-pick "$commit_hash" || {
         echo "Error cherry-picking commit $commit_hash. Aborting."
