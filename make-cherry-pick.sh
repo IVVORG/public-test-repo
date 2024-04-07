@@ -8,7 +8,7 @@ if [ -z "$rc" ];  then
     echo "Please go to git branch and run script from there"
     exit 1
 fi
-if [[ "$rc"=="main" ]];  then
+if [ "$rc"="main" ];  then
     echo "Please go to git branch and run script from there. It does not in main."
     exit 1
 fi
