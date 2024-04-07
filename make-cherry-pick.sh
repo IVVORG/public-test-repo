@@ -3,11 +3,24 @@
 # The input is a comma-separated list of commit hashes
 commit_hashes="$1"
 
+rc=$(git branch --show-current)
+if [ -z "$rc" ];  then
+    echo "Please go to git branch and run script from there"
+    exit 1
+fi
+if [[ "$rc"=="main" ]];  then
+    echo "Please go to git branch and run script from there. It does not in main."
+    exit 1
+fi
+
+echo "Current branch: $rc"
+
 # Check if commit hashes were provided
 if [ -z "$commit_hashes" ]; then
     echo "Usage: $0 <comma-separated list of commit hashes>"
     exit 1
 fi
+
 
 # Initialize an array to hold the sorted commit hashes
 declare -a sorted_commits
@@ -33,7 +46,7 @@ for commit_hash in "${sorted_commits[@]}"; do
         echo "Error cherry-picking commit $commit_hash. Aborting."
         exit 1
     }
-    git push origin rc
+    git push origin $rc
 done
 
 echo "Cherry-pick completed successfully."
