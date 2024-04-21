@@ -16,6 +16,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Cancel running workflows
+      env: 
+        GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        repo: ${{ GITHUB.REPOSITORY }}
+      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/cancelworkflow.sh | bash 
+
     - name: Check PR true
       if: ${{ inputs.ignore_bp3 == 'true' }}
       run: |
