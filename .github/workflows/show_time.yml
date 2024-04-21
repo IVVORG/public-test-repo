@@ -1,0 +1,22 @@
+name: Show Current Time
+
+# This specifies when the workflow should run. In this case, it runs on every push to the main branch.
+on:
+  push:
+    branches:
+      - main
+
+# This is the job that will be executed. Jobs run in parallel by default.
+jobs:
+  display-time:
+    # This job runs on the latest Ubuntu runner provided by GitHub Actions
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Show current time
+        run: |
+          echo "The current time is $(date)"
