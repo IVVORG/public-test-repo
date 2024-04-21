@@ -4,7 +4,7 @@ on: [pull_request_target]
 
 jobs:
   call-workflow-check_commits:
-    uses: untillpro/ci-action/.github/workflows/ci_reuse_go_pr.yml@master
+    uses: ivvist/ci-action/.github/workflows/ci_reuse_go_pr.yml@master
     with: 
       ignore_copyright: 'true'
       ignore_bp3: 'true'
