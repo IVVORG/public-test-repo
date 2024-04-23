@@ -3,6 +3,9 @@ name: Show Current Time
 # This specifies when the workflow should run. In this case, it runs on every push to the main branch.
 on:
   workflow_call:
+    secrets:
+      personaltoken:
+        required: true
     inputs:
       repo: 
         required: false
@@ -30,7 +33,7 @@ jobs:
 #        run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/createissue.sh | bash 
         run: curl -s ./.github/workflows/createissue.sh | bash 
         env: 
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ secrets.personaltoken }}
           repo: ${{ inputs.repo }}
           assignee: ${{ inputs.assignee }}
           name: ${{ inputs.name }}

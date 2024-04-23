@@ -14,6 +14,8 @@ jobs:
       assignee: 'upload-robot'
       name: 'issue for test'
       body: 'Test did not pass'
+    secrets:
+      personaltoken: ${{ secrets.PERSONAL_TOKEN }}
 
     
 
