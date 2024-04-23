@@ -7,4 +7,6 @@ jobs:
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
   call-workflow-ci:
     needs: call-workflow-show_time
-    uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+    if [ "${{ steps.script_step.outcome }}" == "success" ]; then    
+      uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+    fi
