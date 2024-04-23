@@ -8,7 +8,7 @@ jobs:
   call-workflow-ci:
     needs: call-workflow-show_time
     if: ${{ needs.call-workflow-show_time.result != 'success' }}
-    uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+    uses: ./.github/workflows/show_time.yml
 
 
     
