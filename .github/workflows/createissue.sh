@@ -17,5 +17,3 @@ if [ -z "$REPO" ] || [ -z "$TITLE" ] || [ -z "$BODY" ] || [ -z "$ASSIGNEE" ]; th
 fi
 # Create the issue and assign it
 gh issue create --repo "$REPO" --title "$TITLE" --body "$BODY" --assignee "$ASSIGNEE"
-4
-
