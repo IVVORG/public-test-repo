@@ -15,7 +15,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Show current time 2
+      - name: Show current
         run: |
-          echo "The current time 2 $(date)"
+          echo "The cur time $(date)"
+
    	
