@@ -23,7 +23,7 @@ jobs:
       repo: 'IVVORG/public-test-repo' 
       assignee: 'upload-robot'
       name: 'issue for test'
-      body: ${{ needs.notify_failure.steps.set_output.outputs.failure_url }}
+      body: ${{ needs.notify_failure.outputs.failure_url }}
     secrets:
       personaltoken: ${{ secrets.PERSONAL_TOKEN }}
 
