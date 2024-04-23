@@ -6,6 +6,7 @@ jobs:
   call-workflow-show_time:
     uses: ./.github/workflows/show_time.yml
   notify_failure:
+    needs: call-workflow-show_time
     if: ${{ failure() && github.event_name == 'push' }}
     needs: call-workflow-show_time
     runs-on: ubuntu-latest
@@ -16,8 +17,7 @@ jobs:
         id: set_output
         run: echo "failure_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
   call-workflow-ci:
-    needs: call-workflow-show_time
-    if: ${{ needs.call-workflow-show_time.result == 'success' }}
+    needs: notify_failure
     uses: ./.github/workflows/create_issue.yml
     with: 
       repo: 'IVVORG/public-test-repo' 
