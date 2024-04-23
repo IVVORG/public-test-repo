@@ -7,7 +7,7 @@ jobs:
     uses: ./.github/workflows/show_time.yml
   call-workflow-ci:
     needs: call-workflow-show_time
-    if: ${{ needs.call-workflow-show_time.result != 'success' }}
+    if: ${{ needs.call-workflow-show_time.result == 'success' }}
     uses: ./.github/workflows/show_time.yml
 
 
