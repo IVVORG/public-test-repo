@@ -3,18 +3,19 @@ name: Test success
 on: [push]
 
 jobs:
-  call-workflow-show_time:
-    uses: ./.github/workflows/show_time.yml
+#  call-workflow-show_time:
+#    uses: ./.github/workflows/show_time.yml
   notify_failure:
-    needs: call-workflow-show_time
-    if: ${{ failure() }}
+#    needs: call-workflow-show_time
+#    if: ${{ failure() }}
     runs-on: ubuntu-latest
     outputs:
       failure_url: ${{ steps.set_output.outputs.failure_url }}  # Declaring output at the job level
     steps:
       - name: Set Failure URL Output
         id: set_output
-        run: echo "failure_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
+#        run: echo "failure_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
+        run: echo "failure_url=1234567890" >> $GITHUB_OUTPUT
   call-workflow-ci:
     needs: notify_failure
     uses: ./.github/workflows/create_issue.yml
