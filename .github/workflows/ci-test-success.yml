@@ -6,9 +6,10 @@ jobs:
   call-workflow-show_time:
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
     outputs:
-      status: ${{ job.status }}
+      job1_status: ${{ job.status }}
   call-workflow-ci:
     needs: call-workflow-show_time
-    if: always()
+    if: ${{ needs.call-workflow-show_time.outputs.job1_status != 'success' }}
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+
     
