@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   call-workflow-show_time:
-    uses: ./.github/workflows/show_time.yml@main
+    uses: ./.github/workflows/show_time.yml
     outputs:
       job1_status: ${{ job.status }}
   call-workflow-ci:
