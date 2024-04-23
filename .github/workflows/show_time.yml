@@ -15,4 +15,5 @@ jobs:
       - name: Show current time
         run: |
           echo "The current time is $(date)"
+          exit 1 
 
