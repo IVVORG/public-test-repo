@@ -5,6 +5,16 @@ on: [push]
 jobs:
   call-workflow-show_time:
     uses: ./.github/workflows/show_time.yml
+  notify_failure:
+    if: ${{ failure() && github.event_name == 'push' }}
+    needs: call-workflow-show_time
+    runs-on: ubuntu-latest
+    outputs:
+      failure_url: ${{ steps.set_output.outputs.failure_url }}  # Declaring output at the job level
+    steps:
+      - name: Set Failure URL Output
+        id: set_output
+        run: echo "failure_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
   call-workflow-ci:
     needs: call-workflow-show_time
     if: ${{ needs.call-workflow-show_time.result == 'success' }}
@@ -13,7 +23,7 @@ jobs:
       repo: 'IVVORG/public-test-repo' 
       assignee: 'upload-robot'
       name: 'issue for test'
-      body: 'Test did not pass'
+      body: jobs.call-workflow-show_time.steps.notify_failure.outputs.failure_url
     secrets:
       personaltoken: ${{ secrets.PERSONAL_TOKEN }}
 
