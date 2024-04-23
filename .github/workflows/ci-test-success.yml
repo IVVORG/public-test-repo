@@ -16,9 +16,9 @@ jobs:
         id: set_output
         run: 
           echo "failure_url=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
-          exit 0
   call-workflow-ci:
     needs: notify_failure
+    if: ${{ failure() }}
     uses: ./.github/workflows/create_issue.yml
     with: 
       repo: 'IVVORG/public-test-repo' 
