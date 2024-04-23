@@ -28,5 +28,5 @@ jobs:
 
       - name: create issue
         run: |
-          curl -s ./.createissue.sh | bash 
+          curl -s ./createissue.sh | bash 
 
