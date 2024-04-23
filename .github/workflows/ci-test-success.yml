@@ -5,13 +5,3 @@ on: [push]
 jobs:
   call-workflow-show_time:
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
-
-  display-time:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-
-   	
