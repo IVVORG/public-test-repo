@@ -7,8 +7,7 @@ jobs:
     uses: ./.github/workflows/show_time.yml
   notify_failure:
     needs: call-workflow-show_time
-    if: ${{ failure() && github.event_name == 'push' }}
-    needs: call-workflow-show_time
+    if: ${{ failure() }}
     runs-on: ubuntu-latest
     outputs:
       failure_url: ${{ steps.set_output.outputs.failure_url }}  # Declaring output at the job level
