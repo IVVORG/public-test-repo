@@ -14,5 +14,5 @@ jobs:
 
       - name: Show current time
         run: |
-          echo 'The current time unknown'
+          echo 'The current time $(date)'
 
