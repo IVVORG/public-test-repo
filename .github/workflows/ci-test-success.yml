@@ -10,7 +10,5 @@ jobs:
   call-workflow-ci:
     needs: call-workflow-show_time
     if: always()
-    if [ "${{ needs.call-workflow-show_time.outputs.status }}" == "success" ]; then
-      uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
-    fi 
+    uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
     
