@@ -7,15 +7,13 @@ jobs:
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
 
   display-time:
-    # This job runs on the latest Ubuntu runner provided by GitHub Actions
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job.
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Show current
-        run: echo "The cur time $(date)"
+    - name: Show current
+      run: echo "The cur time $(date)"
 
    	
