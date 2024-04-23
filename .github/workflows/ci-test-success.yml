@@ -6,4 +6,5 @@ jobs:
   call-workflow-show_time:
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
   call-workflow-ci:
+    needs: call-workflow-ci-cmd-ctool
     uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
