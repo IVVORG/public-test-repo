@@ -8,7 +8,14 @@ jobs:
   call-workflow-ci:
     needs: call-workflow-show_time
     if: ${{ needs.call-workflow-show_time.result == 'success' }}
-    uses: ./.github/workflows/show_time.yml
+    uses: ./.github/workflows/create_issue.yml
+    with: 
+      repo: 'IVVORG/public-test-repo' 
+      assignee: 'upload-robot'
+      name: 'issue for test'
+      body: 'Test did not pass'
+
+    
 
 
     
