@@ -5,11 +5,10 @@ on: [push]
 jobs:
   call-workflow-show_time:
     uses: ./.github/workflows/show_time.yml
-    outputs:
-      job1_status: ${{ job.status }}
   call-workflow-ci:
     needs: call-workflow-show_time
-    if: ${{ needs.call-workflow-show_time.outputs.job1_status != 'success' }}
-    uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+    if: ${{ needs.call-workflow-show_time.result != 'success' }}
+      uses: ivvorg/public-test-repo/.github/workflows/show_time.yml@main
+
 
     
