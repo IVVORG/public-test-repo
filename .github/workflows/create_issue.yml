@@ -33,7 +33,7 @@ jobs:
         run: curl -s ./.github/workflows/createissue.sh | bash 
         env: 
           GH_TOKEN: ${{ secrets.personaltoken }}
-          repo: ${{ inputs.repo }} $(data)
+          repo: ${{ inputs.repo }}
           assignee: ${{ inputs.assignee }}
           name: ${{ inputs.name }}
           body: ${{ inputs.body }}
