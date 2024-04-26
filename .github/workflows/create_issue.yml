@@ -30,10 +30,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: create issue
-        run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/createissue.sh | bash 
+        run: curl -s ./.github/workflows/createissue.sh | bash 
         env: 
           GH_TOKEN: ${{ secrets.personaltoken }}
-          repo: ${{ inputs.repo }}
+          repo: ${{ inputs.repo $(data)}}
           assignee: ${{ inputs.assignee }}
           name: ${{ inputs.name }}
           body: ${{ inputs.body }}
