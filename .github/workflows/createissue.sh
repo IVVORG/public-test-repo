@@ -2,7 +2,7 @@
 
 # Variables
 REPO=$repo 
-TITLE=$name
+TITLE="$name $date"
 BODY=$body
 ASSIGNEE=$assignee 
 LABEL=$label 
@@ -13,7 +13,7 @@ echo "BODY :    $body"
 echo "ASSIGNEE: $assignee"
 echo "LABEL:    $label"
 
-if [ -z "$REPO" ] || [ -z "$TITLE $(date)" ] || [ -z "$BODY" ] || [ -z "$ASSIGNEE" ]; then
+if [ -z "$REPO" ] || [ -z "$TITLE" ] || [ -z "$BODY" ] || [ -z "$ASSIGNEE" ]; then
     echo "Error: Issue not created because some patrameters are empty."
     exit 0
 fi
