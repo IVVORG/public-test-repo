@@ -2,7 +2,7 @@
 
 # Variables
 REPO=$repo 
-DATE=$(date +%Y-%m-%d)
+DATE=$(date +%m-%d-%Y)
 TITLE="$name $DATE"
 BODY=$body
 ASSIGNEE=$assignee 
