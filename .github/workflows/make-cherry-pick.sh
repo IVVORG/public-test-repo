@@ -56,8 +56,6 @@ echo "The script directory is: $SCRIPT_DIR"
 for commit_hash in $sorted_commits; do
     echo "Cherry-picking commit $commit_hash from main to $branch..."
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
-    git config --local user.email "v.istratenko@dev.untill.com"
-    git config --local user.name "upload-robot"
     commit_hash=$(echo $commit_hash | tr -d ' ')
     echo "commiting sha: $commit_hash"
     git cherry-pick "$commit_hash" || {
@@ -65,7 +63,12 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 echo "3"
-    git push
+    git config --local user.email "v.istratenko@dev.untill.com"
+echo "31"
+    git config --local user.name "upload-robot"
+echo "32"
+    git push origin $rc
+echo "33"
 done
 
 echo "Cherry-pick completed successfully."
