@@ -122,4 +122,4 @@ jobs:
           branch: ${{ steps.set_branch.outputs.branch }}
         run: |
           chmod +x ./.github/workflows/make-cherry-pick.sh
-          bash ./.github/workflows/make-cherry-pick.sh 
+          sh ./.github/workflows/make-cherry-pick.sh 
