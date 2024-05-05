@@ -2,6 +2,11 @@
 
 # The input is a comma-separated list of commit hashes
 echo "Starting checrry-pick..."
+if [ -z "$rc" ];  then
+  echo "branch not defined"
+  exit 1
+fi
+git checkout -b $branch
 commit_hashes_arr="$commit_list"
 echo "sha commiits: commit_hashes_arr"
 normalized=$(echo "$commit_hashes_arr" | tr '.,\n' ' ')
