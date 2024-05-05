@@ -121,5 +121,5 @@ jobs:
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
         run: |
-          chmod +x ./.gitub/workflows/make-cherry-pick.sh
+          chmod +x ./.github/workflows/make-cherry-pick.sh
           bash ./.github/workflows/make-cherry-pick.sh 
