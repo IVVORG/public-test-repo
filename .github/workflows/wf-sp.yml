@@ -33,12 +33,12 @@ jobs:
 
     steps:
       - name: Check Issue
-        run: |
-	  echo "org: ${{ inputs.org }}"
-	  echo "team: ${{ inputs.team }}"
-	  echo "user: ${{ inputs.user }}"
-	  echo "title: ${{ issue_title }}"
-	  echo "body: ${{ issue_body }}"
+        run: | 
+          echo "org: ${{ inputs.org }}"
+          echo "team: ${{ inputs.team }}"
+          echo "user: ${{ inputs.user }}"
+          echo "title: ${{ issue_title }}"
+          echo "body: ${{ issue_body }}"
           exit 1
 
           ORG_NAME=${{ inputs.org }}
