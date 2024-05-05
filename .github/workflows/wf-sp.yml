@@ -6,6 +6,9 @@ on:
       org:
         required: true
         type: string
+      repo:
+        required: true
+        type: string
       team:
         required: true
         type: string
@@ -120,6 +123,8 @@ jobs:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
+          org: ${{ inputs.org }}
+          repo: ${{ inputs.repo }}
         run: |
           git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
           git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
