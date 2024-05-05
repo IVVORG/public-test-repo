@@ -10,7 +10,8 @@ git checkout -b $branch
 commit_hashes_arr="$commit_list"
 echo "sha commiits: $commit_hashes_arr"
 normalized=$(echo "$commit_hashes_arr" | tr '.,\n' ' ')
-readarray -d " " -t commit_hashes <<< "$normalized"
+echo "sha commiits: $normalized"
+readarray -d " " -t commit_hashes <<< $normalized
 
 echo "commit_hashes: $commit_hashes"
 
