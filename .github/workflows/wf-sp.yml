@@ -84,11 +84,11 @@ jobs:
         id: verify_branch
         run: |
           branch=${{ steps.set_branch.outputs.branch }}
-          if !(git show-ref --verify --quiet refs/heads/$branch); then
+          if git branch -r | grep -qE "origin/$branch"; then
+            echo "Branch '$branch' exists."
+          else
             echo "Branch '$branch' does not exist."
             exit 1
-          else
-            echo "Branch '$branch' exists."
           fi
         shell: bash
 
