@@ -1,8 +1,11 @@
 #!/bin/bash
 
 # The input is a comma-separated list of commit hashes
-commit_hashes="$commit_list"
+commit_hashes_arr="$commit_list"
+normalized=$(echo "$commit_hashes_arr" | tr '.,\n' ' ')
+readarray -d " " -t commit_hashes <<< "$normalized"
 
+echo $(git branch --show-current)
 rc=$(git branch --show-current)
 if [ -z "$rc" ];  then
     echo "Please go to git branch and run script from there"
