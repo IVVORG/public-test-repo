@@ -58,14 +58,14 @@ for commit_hash in $sorted_commits; do
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
     commit_hash=$(echo $commit_hash | tr -d ' ')
     echo "commiting sha: $commit_hash"
-    git cherry-pick "$commit_hash" || {
-        echo "Error cherry-picking commit $commit_hash. Aborting."
-        exit 1
-    }
 echo "3"
     git config --local user.email "v.istratenko@dev.untill.com"
 echo "31"
     git config --local user.name "upload-robot"
+    git cherry-pick "$commit_hash" || {
+        echo "Error cherry-picking commit $commit_hash. Aborting."
+        exit 1
+    }
 echo "32"
     git push origin $rc
 echo "33"
