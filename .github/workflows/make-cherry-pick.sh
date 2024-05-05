@@ -65,5 +65,6 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 done
+git push
 
 echo "Cherry-pick completed successfully."
