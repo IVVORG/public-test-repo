@@ -54,6 +54,8 @@ done | sort | awk '{print $4}')
 for commit_hash in $sorted_commits; do
     echo "Cherry-picking commit $commit_hash from main to $branch..."
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
+    git config --local user.email "v.istratenko@dev.untill.com"
+    git config --local user.name "upload-robot"
     commit_hash=$(echo $commit_hash | tr -d ' ')
     echo "commiting sha: $commit_hash"
     git cherry-pick "$commit_hash" || {
