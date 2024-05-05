@@ -47,7 +47,7 @@ jobs:
           echo "team1: $TEAM_NAME"
           echo "user1: $USER_NAME"
           # Check organization membership
-          ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
+          ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.PERSONAL_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
       
           if [[ $ORG_MEMBERSHIP -ne 404 ]]; then
             echo "The user $USER_NAME is a member of the organization $ORG_NAME."
@@ -57,7 +57,7 @@ jobs:
           fi
 
           # Check team membership
-          TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
+          TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.PERSONAL_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
       
           if [[ $TEAM_MEMBERSHIP -eq 200 ]]; then
             echo "The user $USER_NAME is a member of the team $TEAM_NAME within the organization $ORG_NAME."
