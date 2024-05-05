@@ -7,7 +7,7 @@ if [ -z "$branch" ];  then
   exit 1
 fi
 echo "https://github.com/$org/$repo"
-git clone -b $branch "https://github.com/$org/$repo.git" chp || {
+git clone -b $branch "https://github.com/$org/$repo" chp || {
    echo "Something wnet wrong with clone branch"
    exit 1
 }
@@ -65,6 +65,7 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 done
-git push
+git remote set-url origin https://github.com/$org/$repo.git
+git push origin $rc
 
 echo "Cherry-pick completed successfully."
