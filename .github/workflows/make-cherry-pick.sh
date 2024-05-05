@@ -66,7 +66,7 @@ echo "1"
 echo "2"
     git commit -m "cherry-pick: $commit_hash"
 echo "3"
-    git push origin $rc
+    git push
 done
 
 echo "Cherry-pick completed successfully."
