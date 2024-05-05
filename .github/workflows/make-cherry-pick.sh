@@ -8,7 +8,6 @@ if [ -z "$branch" ];  then
 fi
 git checkout -b $branch
 commit_hashes_arr="$commit_list"
-echo "sha commiits: $commit_hashes_arr"
 for word in $commit_hashes_arr; do
   # Append word to the list
   commit_hashes="$commit_hashes $word"
@@ -34,20 +33,22 @@ if [ -z "$commit_hashes" ]; then
     exit 1
 fi
 
-# Initialize an array to hold the sorted commit hashes
-echo "1"
-declare -a sorted_commits
-echo "2"
+
+# Initialize a space-separated string to hold sorted commit hashes
+sorted_commits=""
 
 # Loop through the hashes, get their commit dates, and sort them
-# Then read line by line into the array
-while IFS= read -r line; do
-    sorted_commits+=("$line")
-done < <(for commit in $commit_hashes; do
-echo "3"
-    # Using %ci to get the commit date, you can also use %ct for UNIX timestamp
-echo $(git show -s --format=%ci $commit) $commit
+# Capture the sorted hashes into a string variable
+sorted_commits=$(for commit in $commit_hashes; do
+    # Get the commit date using %ci, output with commit hash
+    commit_info=$(git show -s --format=%ci $commit)
+    echo "$commit_info $commit"
 done | sort | awk '{print $4}')
+
+# Process each sorted commit hash separately
+for commit in $sorted_commits; do
+    echo "$commit"
+done
 
 # Now, you can use sorted_commits array as needed
 echo "Sorted commits:"
