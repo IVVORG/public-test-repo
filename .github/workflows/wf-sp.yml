@@ -1,0 +1,108 @@
+name: Cherry Pick Commits on Issue Creation
+
+on:
+  workflow_call:
+    inputs:
+      org:
+        required: true
+        type: string
+      team:
+        required: true
+        type: string
+      user:
+        required: true
+        type: string
+      issue_title:
+        required: true
+        type: string
+      issue_body:
+        required: true
+        type: string
+
+jobs:
+  cherry_pick:
+    if: inputs.issue_title == 'cprc' || inputs.issue_title == 'cprelease'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: main  # Checkout the main branch
+          fetch-depth: 0  # Fetch all history for cherry-picking
+
+    steps:
+      - name: Check Issue
+        run: |
+	  echo "org: ${{ inputs.org }}"
+	  echo "team: ${{ inputs.team }}"
+	  echo "user: ${{ inputs.user }}"
+	  echo "title: ${{ issue_title }}"
+	  echo "body: ${{ issue_body }}"
+exit 1
+
+          ORG_NAME=${{ inputs.org }}
+          TEAM_NAME=${{ inputs.team }}
+          USER_NAME=${{ inputs.user }}
+      
+          # Check organization membership
+          ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
+      
+          if [[ $ORG_MEMBERSHIP -eq 204 ]]; then
+            echo "The user $USER_NAME is a member of the organization $ORG_NAME."
+          else
+            echo "The user $USER_NAME is not a member of the organization $ORG_NAME."
+            exit 1
+          fi
+      
+          # Check team membership
+          TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
+      
+          if [[ $TEAM_MEMBERSHIP -eq 200 ]]; then
+            echo "The user $USER_NAME is a member of the team $TEAM_NAME within the organization $ORG_NAME."
+          else
+            echo "The user $USER_NAME is not a member of the team $TEAM_NAME within the organization $ORG_NAME."
+            exit 1
+          fi
+
+      - name: Determine target branch
+        id: set_branch
+        run: |
+          title="${{ inputs.issue_title }}"
+          if [[ "$title" == "cprc" ]]; then
+            branch="rc"
+          elif [[ "$title" == "cprelease" ]]; then
+            branch="release"
+          else
+            echo "Unknown issue title. Aborting."
+            exit 1
+          fi
+          echo "::set-output name=branch::${branch}"
+        shell: bash
+
+      - name: Verify if '$branch' branch exists
+        id: verify_branch
+        run: |
+          if !(git show-ref --verify --quiet refs/heads/$branch); then
+            echo "Branch '$branch' does not exist."
+          fi
+        shell: bash
+
+      - name: Install jq for JSON processing
+        run: sudo apt-get install jq -y
+
+      - name: Parse issue description for commit SHAs
+        id: parse_commits             
+        run: |
+          # Extract all SHA hashes from the issue description
+          commit_list=$(echo "${{ inputs.body }}" | grep -oE '\b[0-9a-f]{7,40}\b' | tac | tr '\n' ' ')
+          echo "::set-output name=commits::${commit_list}"
+        shell: bash
+
+      - name: Cherry pick commits to $branch
+        env: 
+          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          commit_list: ${{ steps.parse_commits.outputs.commits }}
+        run: |
+          git checkout -b $branch
+          curl -s ./.github/workflows/make-cherry-pick.sh | bash 

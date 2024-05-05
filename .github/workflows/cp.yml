@@ -1,0 +1,17 @@
+name: Cherry Pick Commits on Issue Creation
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+
+  cherry-pick:
+    uses: ./.github/workflows/wf-sp.yml@master
+    with: 
+      org: 'IVVORG'
+      team: 'DevOps-cp'
+      user: '${{ github.event.issue.user.login }}'
+      issue_title: '${{ github.event.issue.title }}'
+      issue_body: '${{ github.event.issue.body }}'
+
