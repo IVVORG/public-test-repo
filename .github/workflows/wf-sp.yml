@@ -115,11 +115,12 @@ jobs:
           echo "::set-output name=commits::${commit_list}"
         shell: bash
 
-      - name: Cherry pick commits to $branch
+      - name: Cherry pick commits to branch
         env: 
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
         run: |
           echo ${{ steps.parse_commits.outputs.commits }}
+          branch=${{ steps.set_branch.outputs.branch }}
           git checkout -b $branch
           curl -s ./.github/workflows/make-cherry-pick.sh | bash 
