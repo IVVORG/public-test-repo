@@ -101,8 +101,8 @@ jobs:
           if [ -z "$body" ]; then
             echo "Issue body is empty"
           fi
-          commit_list=$(echo "$body" | tr '.,\n' ' ' | tr -s ' ')
-          echo "commit_list:$commit_list"
+          normalized=$(echo '${{ inputs.issue-body }}' | tr '.,\n' ' ' | tr -s ' ')
+          echo "commit_list444444444444444:$normalized"
            
           echo "::set-output name=commits::${commit_list}"
         shell: bash
