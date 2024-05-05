@@ -102,7 +102,7 @@ jobs:
             echo "Issue body is empty"
           fi
           commit_list=$(echo "$body" | tr '.,\n' ' ' | tr -s ' ')
-          echo $commit_list 
+          echo "commit_list:$commit_list"
            
           echo "::set-output name=commits::${commit_list}"
         shell: bash
