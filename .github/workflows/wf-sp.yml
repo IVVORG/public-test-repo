@@ -101,9 +101,16 @@ jobs:
           if [ -z "$body" ]; then
             echo "Issue body is empty"
           fi
-          normalized=$(echo '${{ inputs.issue-body }}' | tr '.,\n' ' ' | tr -s ' ')
-          echo "commit_list444444444444444:$normalized"
-           
+
+          commit_list=""
+          while IFS= read -r line; do
+          cleaned_line=$(echo "$line" | tr '.,' ' ' | tr -s ' ')
+            commit_list+="$cleaned_line "
+          done <<< "$body"
+
+          # Удаляем лишний пробел в конце
+          result=$(echo "$commit_list" | sed 's/[[:space:]]*$//')           
+          echo "commit_list: $commit_list"
           echo "::set-output name=commits::${commit_list}"
         shell: bash
 
