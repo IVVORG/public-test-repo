@@ -31,7 +31,6 @@ jobs:
           ref: main  # Checkout the main branch
           fetch-depth: 0  # Fetch all history for cherry-picking
 
-    steps:
       - name: Check Issue
         run: | 
           echo "org: ${{ inputs.org }}"
