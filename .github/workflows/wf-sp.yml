@@ -121,6 +121,7 @@ jobs:
       - name: Cherry pick commits to branch
         env: 
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
           org: ${{ inputs.org }}
@@ -129,4 +130,4 @@ jobs:
           git config --local user.email "v.istratenko@dev.untill.com"
           git config --local user.name "upload-robot"
           chmod +x ./.github/workflows/make-cherry-pick.sh
-          sh ./.github/workflows/make-cherry-pick.sh 
+          bash ./.github/workflows/make-cherry-pick.sh 
