@@ -6,7 +6,8 @@ if [ -z "$branch" ];  then
   echo "Branch is not defined"
   exit 1
 fi
-git clone -b $branch https://github.com/$org/$repo chp || {
+echo "https://github.com/$org/$repo"
+git clone -b $branch "https://github.com/$org/$repo" chp || {
    echo "Something wnet wrong with clone branch"
    exit 1
 }
