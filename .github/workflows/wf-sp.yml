@@ -97,7 +97,7 @@ jobs:
         id: parse_commits             
         run: |
           # Extract all SHA hashes from the issue description
-          body=${{ inputs.issue_body }} 
+          body=${{ inputs.issue-body }} 
           if [ -z "$body" ]; then
             echo "Issue body is empty"
           fi
