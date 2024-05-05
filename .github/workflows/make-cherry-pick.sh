@@ -65,12 +65,7 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 done
-echo "11"
-echo "git remote set-url origin https://github.com/$org/$repo.git"
 git remote set-url origin https://github.com/$org/$repo.git
-echo "12"
-echo "git push origin $rc"
 git push origin $rc
-echo "13"
 
 echo "Cherry-pick completed successfully."
