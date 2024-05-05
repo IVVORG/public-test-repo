@@ -36,8 +36,8 @@ jobs:
           echo "org: ${{ inputs.org }}"
           echo "team: ${{ inputs.team }}"
           echo "user: ${{ inputs.user }}"
-          echo "title: ${{ issue-title }}"
-          echo "body: ${{ issue-body }}"
+          echo "title: ${{ inputs.issue-title }}"
+          echo "body: ${{ inputs.issue-body }}"
           exit 1
 
           ORG_NAME=${{ inputs.org }}
