@@ -120,5 +120,7 @@ jobs:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
-        run: ./make-cherry-pick.sh 
+        run: |
+          chmod +x ./.gitub/workflows/make-cherry-pick.sh
+          ./.gitub/workflows/make-cherry-pick.sh 
         shell: bash
