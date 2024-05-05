@@ -49,7 +49,7 @@ jobs:
           # Check organization membership
           ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
       
-          if [[ $ORG_MEMBERSHIP -eq 204 ]]; then
+          if [[ $ORG_MEMBERSHIP -ne 404 ]]; then
             echo "The user $USER_NAME is a member of the organization $ORG_NAME."
           else
             echo "The user $USER_NAME is not a member of the organization $ORG_NAME."
