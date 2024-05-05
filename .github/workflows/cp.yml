@@ -7,7 +7,7 @@ on:
 jobs:
 
   cherry-pick:
-    uses: ./.github/workflows/wf-sp.yml@master
+    uses: ./.github/workflows/wf-sp.yml
     with: 
       org: 'IVVORG'
       team: 'DevOps-cp'

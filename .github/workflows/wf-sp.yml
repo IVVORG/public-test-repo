@@ -39,7 +39,7 @@ jobs:
 	  echo "user: ${{ inputs.user }}"
 	  echo "title: ${{ issue_title }}"
 	  echo "body: ${{ issue_body }}"
-exit 1
+          exit 1
 
           ORG_NAME=${{ inputs.org }}
           TEAM_NAME=${{ inputs.team }}
