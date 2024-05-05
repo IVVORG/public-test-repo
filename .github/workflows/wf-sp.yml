@@ -58,7 +58,7 @@ jobs:
 
           # Check team membership
           TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.PERSONAL_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
-      
+          echo "$TEAM_MEMBERSHIP" 		       
           if [[ $TEAM_MEMBERSHIP -eq 200 ]]; then
             echo "The user $USER_NAME is a member of the team $TEAM_NAME within the organization $ORG_NAME."
           else
