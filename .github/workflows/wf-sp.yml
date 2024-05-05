@@ -120,4 +120,5 @@ jobs:
           GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
-        run: curl -s https://github.com/IVVORG/public-test-repo/blob/main/.github/workflows/make-cherry-pick.sh | bash 
+        run: ./make-cherry-pick.sh 
+        shell: bash
