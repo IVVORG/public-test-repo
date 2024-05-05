@@ -106,6 +106,7 @@ jobs:
           while IFS= read -r line; do
           cleaned_line=$(echo "$line" | tr '.,' ' ' | tr -s ' ')
             commit_list+="$cleaned_line "
+            echo "cleaned_line: $cleaned_line"
           done <<< "$body"
 
           # Удаляем лишний пробел в конце
