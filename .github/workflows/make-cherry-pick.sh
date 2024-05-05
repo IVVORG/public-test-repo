@@ -50,6 +50,8 @@ sorted_commits=$(for commit in $commit_hashes; do
     echo "$commit_info $commit"
 done | sort | awk '{print $4}')
 
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+echo "The script directory is: $SCRIPT_DIR"
 # Process each sorted commit hash separately
 for commit_hash in $sorted_commits; do
     echo "Cherry-picking commit $commit_hash from main to $branch..."
