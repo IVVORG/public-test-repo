@@ -1,4 +1,4 @@
-name: Cherry Pick Commits on Issue Creation
+`name: Cherry Pick Commits on Issue Creation
 
 on:
   workflow_call:
@@ -135,4 +135,4 @@ jobs:
           directory: airs-config-sync
           repository: ${{ inputs.org }}/${{ inputs.repo }}
           branch: ${{ steps.set_branch.outputs.branch }}
-          github_token: ${{ secrets.personaltoken }}
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
