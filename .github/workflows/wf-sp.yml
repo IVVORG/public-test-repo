@@ -105,13 +105,13 @@ jobs:
           commit_list=""
           while IFS= read -r line; do
           cleaned_line=$(echo "$line" | tr '.,' ' ' | tr -s ' ')
-            $cleaned_line=$(echo "$cleaned_line" | sed 's/[[:space:]]*$//')           
+            cleaned_line=$(echo "$cleaned_line" | sed 's/[[:space:]]*$//')           
             echo "cleaned_line: $cleaned_line"
             commit_list+=" $cleaned_line"
             echo "commit_list0: $commit_list"
           done <<< "$body"
 
-          $commit_list=$(echo "$commit_list" | sed 's/[[:space:]]*$//')           
+          commit_list=$(echo "$commit_list" | sed 's/[[:space:]]*$//')           
           echo "commit_list: $commit_list"
           echo "::set-output name=commits::${commit_list}"
         shell: bash
