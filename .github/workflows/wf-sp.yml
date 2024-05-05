@@ -126,6 +126,8 @@ jobs:
           org: ${{ inputs.org }}
           repo: ${{ inputs.repo }}
         run: |
+          git config --local user.email "v.istratenko@dev.untill.com"
+          git config --local user.name "upload-robot"
           chmod +x ./.github/workflows/make-cherry-pick.sh
           sh ./.github/workflows/make-cherry-pick.sh 
 
