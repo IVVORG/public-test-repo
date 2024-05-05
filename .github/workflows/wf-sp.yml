@@ -86,9 +86,9 @@ jobs:
           branch=${{ steps.set_branch.outputs.branch }}
           if !(git show-ref --verify --quiet refs/heads/$branch); then
             echo "Branch '$branch' does not exist."
+            exit 1
           else
             echo "Branch '$branch' exists."
-            exit 1
           fi
         shell: bash
 
