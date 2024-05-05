@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # The input is a comma-separated list of commit hashes
+echo "Starting checrry-pick..."
 commit_hashes_arr="$commit_list"
+echo "sha commiits: commit_hashes_arr"
 normalized=$(echo "$commit_hashes_arr" | tr '.,\n' ' ')
 readarray -d " " -t commit_hashes <<< "$normalized"
 
