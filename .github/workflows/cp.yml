@@ -12,6 +12,6 @@ jobs:
       org: 'IVVORG'
       team: 'DevOps-cp'
       user: '${{ github.event.issue.user.login }}'
-      issue_title: '${{ github.event.issue.title }}'
-      issue_body: '${{ github.event.issue.body }}'
+      issue-title: '${{ github.event.issue.title }}'
+      issue-body: '${{ github.event.issue.body }}'
 

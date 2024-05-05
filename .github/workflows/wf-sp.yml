@@ -12,16 +12,16 @@ on:
       user:
         required: true
         type: string
-      issue_title:
+      issue-title:
         required: true
         type: string
-      issue_body:
+      issue-body:
         required: true
         type: string
 
 jobs:
   cherry_pick:
-    if: inputs.issue_title == 'cprc' || inputs.issue_title == 'cprelease'
+    if: inputs.issue-title == 'cprc' || inputs.issue-title == 'cprelease'
     runs-on: ubuntu-latest
 
     steps:
@@ -36,8 +36,8 @@ jobs:
           echo "org: ${{ inputs.org }}"
           echo "team: ${{ inputs.team }}"
           echo "user: ${{ inputs.user }}"
-          echo "title: ${{ issue_title }}"
-          echo "body: ${{ issue_body }}"
+          echo "title: ${{ issue-title }}"
+          echo "body: ${{ issue-body }}"
           exit 1
 
           ORG_NAME=${{ inputs.org }}
@@ -67,7 +67,7 @@ jobs:
       - name: Determine target branch
         id: set_branch
         run: |
-          title="${{ inputs.issue_title }}"
+          title="${{ inputs.issue-title }}"
           if [[ "$title" == "cprc" ]]; then
             branch="rc"
           elif [[ "$title" == "cprelease" ]]; then
