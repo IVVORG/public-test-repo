@@ -14,7 +14,6 @@ for word in $commit_hashes_arr; do
 done
 echo "commit_hashes: $commit_hashes"
 
-echo $(git branch --show-current)
 rc=$(git branch --show-current)
 if [ -z "$rc" ];  then
     echo "Please go to git branch and run script from there"
@@ -46,16 +45,8 @@ sorted_commits=$(for commit in $commit_hashes; do
 done | sort | awk '{print $4}')
 
 # Process each sorted commit hash separately
-for commit in $sorted_commits; do
-    echo "$commit"
-done
-
-# Now, you can use sorted_commits array as needed
-echo "Sorted commits:"
-printf "%s\n" "${sorted_commits[@]}"
-# Loop through the array and cherry-pick each commit from the "main" branch
-for commit_hash in "${sorted_commits[@]}"; do
-    echo "Cherry-picking commit $commit_hash from main to rc..."
+for commit_hash in $sorted_commits; do
+    echo "Cherry-picking commit $commit_hash from main to $branch..."
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
     commit_hash=$(echo $commit_hash | tr -d ' ')
     git cherry-pick "$commit_hash" || {
