@@ -121,5 +121,7 @@ jobs:
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
         run: |
+          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
           chmod +x ./.github/workflows/make-cherry-pick.sh
           sh ./.github/workflows/make-cherry-pick.sh 
