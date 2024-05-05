@@ -9,7 +9,10 @@ fi
 git checkout -b $branch
 commit_hashes_arr="$commit_list"
 echo "sha commiits: $commit_hashes_arr"
-readarray -d " " -t commit_hashes <<< $commit_hashes_arr
+for word in $commit_hashes_arr; do
+  # Append word to the list
+  commit_hashes="$commit_hashes $word"
+done
 echo "commit_hashes: $commit_hashes"
 
 echo $(git branch --show-current)
