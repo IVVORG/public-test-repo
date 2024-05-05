@@ -83,11 +83,10 @@ jobs:
         run: |
           if !(git show-ref --verify --quiet refs/heads/$branch); then
             echo "Branch '$branch' does not exist."
+          else
+            echo "Branch '$branch' exists."
           fi
         shell: bash
-
-        echo "branch: $branch"
-        exit 1
 
       - name: Install jq for JSON processing
         run: sudo apt-get install jq -y
