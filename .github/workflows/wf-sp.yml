@@ -97,7 +97,10 @@ jobs:
         id: parse_commits             
         run: |
           # Extract all SHA hashes from the issue description
-          commit_list=$(echo "${{ inputs.body }}" | grep -oE '\b[0-9a-f]{7,40}\b' | tac | tr '\n' ' ')
+          if [ -z "$string" ]; then
+            echo "Issue body is empty"
+          fi
+          commit_list=$(echo "${{ inputs.issue_body }}" | grep -oE '\b[0-9a-f]{7,40}\b' | tac | tr '\n' ' ')
           echo "::set-output name=commits::${commit_list}"
         shell: bash
 
