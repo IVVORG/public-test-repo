@@ -38,7 +38,6 @@ jobs:
           echo "user: ${{ inputs.user }}"
           echo "title: ${{ inputs.issue-title }}"
           echo "body: ${{ inputs.issue-body }}"
-          exit 1
 
           ORG_NAME=${{ inputs.org }}
           TEAM_NAME=${{ inputs.team }}
@@ -86,6 +85,9 @@ jobs:
             echo "Branch '$branch' does not exist."
           fi
         shell: bash
+
+        echo "branch: $branch"
+        exit 1
 
       - name: Install jq for JSON processing
         run: sudo apt-get install jq -y
