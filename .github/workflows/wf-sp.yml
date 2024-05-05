@@ -126,7 +126,7 @@ jobs:
           org: ${{ inputs.org }}
           repo: ${{ inputs.repo }}
         run: |
-          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
-          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          git config --local user.email "v.istratenko@dev.untill.com"
+          git config --local user.name "upload-robot"
           chmod +x ./.github/workflows/make-cherry-pick.sh
           sh ./.github/workflows/make-cherry-pick.sh 
