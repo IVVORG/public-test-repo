@@ -53,7 +53,6 @@ jobs:
             echo "The user $USER_NAME is a member of the organization $ORG_NAME."
           else
             echo "The user $USER_NAME is not a member of the organization $ORG_NAME."
-#            exit 1
           fi
 
           # Check team membership
