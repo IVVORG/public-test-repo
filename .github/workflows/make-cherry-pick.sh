@@ -64,11 +64,6 @@ for commit_hash in $sorted_commits; do
         echo "Error cherry-picking commit $commit_hash. Aborting."
         exit 1
     }
-    git pull origin $rc
-echo "1"
-    git add .
-echo "2"
-    git commit -m "cherry-pick: $commit_hash"
 echo "3"
     git push
 done
