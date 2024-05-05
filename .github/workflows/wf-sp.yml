@@ -101,9 +101,7 @@ jobs:
           if [ -z "$body" ]; then
             echo "Issue body is empty"
           fi
-          normalized=$(echo "$body" | tr '.,\n' ' ')
-          # Read words into an array, splitting by spaces
-          readarray -d " " -t commit_list <<< "$normalized"
+          commit_list=$(echo "$body" | tr '.,\n' ' ' | tr -s ' ')
            
           echo "::set-output name=commits::${commit_list}"
         shell: bash
