@@ -7,7 +7,7 @@ if [ -z "$branch" ];  then
   exit 1
 fi
 echo "https://github.com/$org/$repo"
-git clone -b $branch "https://github.com/$org/$repo" chp || {
+git clone -b $branch "https://github.com/$org/$repo.git" chp || {
    echo "Something wnet wrong with clone branch"
    exit 1
 }
