@@ -16,5 +16,5 @@ jobs:
       issue-title: '${{ github.event.issue.title }}'
       issue-body: '${{ github.event.issue.body }}'
     secrets:
-      github_token: ${{ secrets.REPOREADING_TOKEN }}
+      git_token: ${{ secrets.REPOREADING_TOKEN }}
 
