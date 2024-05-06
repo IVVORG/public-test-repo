@@ -50,7 +50,7 @@ jobs:
           echo "team1: $TEAM_NAME"
           echo "user1: $USER_NAME"
           # Check organization membership
-          ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.PERSONAL_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
+          ORG_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/members/$USER_NAME")
       
           if [[ $ORG_MEMBERSHIP -ne 404 ]]; then
             echo "The user $USER_NAME is a member of the organization $ORG_NAME."
@@ -60,7 +60,7 @@ jobs:
           fi
 
           # Check team membership
-          TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.PERSONAL_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
+          TEAM_MEMBERSHIP=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer ${{ secrets.REPOREADING_TOKEN }}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$USER_NAME")
           echo "$TEAM_MEMBERSHIP" 		       
           if [[ $TEAM_MEMBERSHIP -eq 200 ]]; then
             echo "The user $USER_NAME is a member of the team $TEAM_NAME within the organization $ORG_NAME."
@@ -120,8 +120,8 @@ jobs:
 
       - name: Cherry pick commits to branch
         env: 
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }}
+          github_token: ${{ secrets.REPOREADING_TOKEN }}
           commit_list: ${{ steps.parse_commits.outputs.commits }}
           branch: ${{ steps.set_branch.outputs.branch }}
           org: ${{ inputs.org }}
@@ -129,6 +129,6 @@ jobs:
         run: |
           git config --local user.email "v.istratenko@dev.untill.com"
           git config --local user.name "upload-robot"
-          git config --global url.https://${{ secrets.PERSONAL_TOKEN }}@github.com/.insteadOf https://github.com/
+          git config --global url.https://${{ secrets.REPOREADING_TOKEN }}@github.com/.insteadOf https://github.com/
           chmod +x ./.github/workflows/make-cherry-pick.sh
           bash ./.github/workflows/make-cherry-pick.sh 
