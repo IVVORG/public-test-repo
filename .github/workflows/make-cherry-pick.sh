@@ -65,6 +65,7 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 done
+git config --global url.https://$github_token@github.com/.insteadOf https://github.com/
 git push origin $rc
 
 echo "Cherry-pick completed successfully."
