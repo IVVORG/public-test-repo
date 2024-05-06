@@ -15,4 +15,6 @@ jobs:
       user: '${{ github.event.issue.user.login }}'
       issue-title: '${{ github.event.issue.title }}'
       issue-body: '${{ github.event.issue.body }}'
+    secrets:
+      github_token: ${{ secrets.REPOREADING_TOKEN }}
 
