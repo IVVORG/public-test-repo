@@ -8,7 +8,7 @@ jobs:
 
   add-issue-comment:
     # Use GitHub Script to add a comment
-    name: Build
+    if: inputs.issue-title == 'cprc' || inputs.issue-title == 'cprelease'
     runs-on: ubuntu-latest
     steps:
       - name: Add comment to cherry pick issue
