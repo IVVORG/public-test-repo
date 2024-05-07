@@ -77,7 +77,7 @@ jobs:
           
           if [[ startsWith($title, 'cprc') ]]; then
             branch="rc"
-          elif [[ startsWith($title, 'cprelease' ]]; then
+          elif [[ startsWith($title, 'cprelease') ]]; then
             branch="release"
           else
             echo "Unknown issue title. Aborting."
