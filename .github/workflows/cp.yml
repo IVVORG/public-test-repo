@@ -4,15 +4,14 @@ on: [push]
 #  issues:
 #    types: [opened]
 
-jobs:
-
+jobs: 
   add-issue-comment:
-    # Use GitHub Script to add a comment
     if: inputs.issue-title == 'cprc' || inputs.issue-title == 'cprelease'
     runs-on: ubuntu-latest
+
     steps:
-    - name: Add comment to cherry pick issue
-      env:
+    - name: Unlink issue from milestone
+      env: 
         GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
         org: 'IVVORG'
         repo: 'public-test-repo'
