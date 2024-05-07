@@ -15,7 +15,7 @@ jobs:
       - name: Add comment to cherry pick issue
         env: 
           github_token: ${{ secrets.REPOREADING_TOKEN }}
-          GH_TOKEN: : ${{ secrets.REPOREADING_TOKEN }} 
+          GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
           org: 'IVVORG'
           repo: 'public-test-repo'
           issue: '${{ github.event.issue.id }}'
