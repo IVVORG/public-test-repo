@@ -26,13 +26,16 @@ echo "orig_branch: $orig_branch"
 git fetch --all
 for commit_hash in $sorted_commits; do
   # Check if commit exists in current branch
-  git branch -r --contains  | sed 's/origin\///'
-  cmt=$(echo "$commit_hash" | sed 's/^[ \t]*//;s/[ \t]*$//')
+  cmt=$(git branch -r --contains  | sed 's/origin\///')
+  echo "cmt1=$cmt"
+  cmt=$(echo "$cmt" | sed 's/^[ \t]*//;s/[ \t]*$//')
+  echo "cmt2=$cmt"
+   
   if [ -z "$cmt" ]; then
      echo "Commit $commit_hash does not exists"
      exit 1	
   fi 
-  if [[ "$cmt" != "$orig_branch" ]]; then
+  if [[ $cmt != $orig_branch ]]; then
      echo "Commit $commit_hash does not belong to original branch $orig_branch"
      exit 1	
   fi 
