@@ -11,9 +11,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-
       - name: Add comment to cherry pick issue
-        env:
+        env: 
           github_token: ${{ secrets.REPOREADING_TOKEN }}
           GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
           org: 'IVVORG'
