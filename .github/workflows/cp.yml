@@ -11,16 +11,16 @@ jobs:
     if: inputs.issue-title == 'cprc' || inputs.issue-title == 'cprelease'
     runs-on: ubuntu-latest
     steps:
-      - name: Add comment to cherry pick issue
-        env: 
-          GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
-          org: 'IVVORG'
-          repo: 'public-test-repo'
-          issue: '${{ github.event.issue.id }}'
-          body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
-        run: |
-          chmod +x ./.github/workflows/add-issue-commit.sh
-          bash ./.github/workflows/add-issue-commit.sh 
+    - name: Add comment to cherry pick issue
+      env: 
+        GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
+        org: 'IVVORG'
+        repo: 'public-test-repo'
+        issue: '${{ github.event.issue.id }}'
+        body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+      run: |
+        chmod +x ./.github/workflows/add-issue-commit.sh
+        bash ./.github/workflows/add-issue-commit.sh 
 
 #  cherry-pick:
 #    uses: ./.github/workflows/wf-sp.yml
