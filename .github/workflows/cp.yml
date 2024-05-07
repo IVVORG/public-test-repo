@@ -15,9 +15,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            issue_number = ${{ github.event.issue.id }};
-            workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const issue_number = ${{ github.event.issue.id }};
+            const workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             gh issue comment $issue_number --body $workflow_run_url
 
 #  cherry-pick:
