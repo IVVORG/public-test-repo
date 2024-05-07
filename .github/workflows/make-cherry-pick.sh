@@ -7,11 +7,6 @@ if [ -z "$branch" ];  then
   exit 1
 fi
 echo "https://github.com/$org/$repo"
-git clone -b $branch "https://github.com/$org/$repo" chp || {
-   echo "Something wnet wrong with clone branch"
-   exit 1
-}
-cd chp
 
 commit_hashes_arr="$commit_list"
 for word in $commit_hashes_arr; do
@@ -19,6 +14,32 @@ for word in $commit_hashes_arr; do
   commit_hashes="$commit_hashes $word"
 done
 echo "commit_hashes: $commit_hashes"
+
+
+if [[ "$branch" != "rc" ]]; then
+  orig_branch="main"   
+else
+  orig_branch="rc"   
+fi
+
+git fetch --all
+for commit_hash in $sorted_commits; do
+  # Check if commit exists in current branch
+  git branch -r --contains  | sed 's/origin\///'
+  cmt=$(echo "$commit_hash" | sed 's/^[ \t]*//;s/[ \t]*$//')
+  if [ -z "$cmt" ]; then
+     echo "Commit $commit_hash does not exists"
+  fi 
+  if [[ "$cmt" != "$orig_branch" ]]; then
+     echo "Commit $commit_hash does not belong to original branch $orig_branch"
+  fi 
+fi
+
+git clone -b $branch "https://github.com/$org/$repo" chp || {
+   echo "Something wnet wrong with clone branch"
+   exit 1
+}
+cd chp
 
 rc=$(git branch --show-current)
 if [ -z "$rc" ];  then
@@ -60,7 +81,6 @@ for commit_hash in $sorted_commits; do
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
     commit_hash=$(echo $commit_hash | tr -d ' ')
     echo "commiting sha: $commit_hash"
-    git branch --contains $commit_hash
     git cherry-pick "$commit_hash" || {
         echo "Error cherry-picking commit $commit_hash. Aborting."
         exit 1
