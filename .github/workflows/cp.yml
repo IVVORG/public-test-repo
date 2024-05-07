@@ -18,6 +18,7 @@ jobs:
 #        body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
       run: |
         pwd 
+        ls
         bash ./add-issue-commit.sh
 
 #  cherry-pick:
