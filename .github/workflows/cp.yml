@@ -2,7 +2,7 @@ name: Cherry Pick Commits on Issue Creation
 
 on:
   issues:
-    types: [opened]
+    types: [push]
 
 jobs:
 
@@ -11,15 +11,31 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
       - name: Add comment to issue
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue_number = ${{ github.event.issue.id }};
+            // The GitHub context object contains useful information about the current workflow
+            const context = github.context;
+
+            // Specify the issue number you want to comment on
+            const issue_number = 414;
+
+            // Construct the workflow run URL
             const workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            gh issue comment $issue_number --body $workflow_run_url
+
+            // Create the comment content
+            const body = `This is a comment with a link to the running workflow: [Workflow Run #${context.runNumber}](${workflow_run_url})`;
+
+            // Add a comment to the specified issue
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: body
+            });
 
 #  cherry-pick:
 #    uses: ./.github/workflows/wf-sp.yml
