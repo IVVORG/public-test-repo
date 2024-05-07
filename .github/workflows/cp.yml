@@ -43,6 +43,7 @@ jobs:
 
   close-issue:
     needs: cherry-pick
+    runs-on: ubuntu-latest
     steps:
     - name: Close issue 
       env: 
