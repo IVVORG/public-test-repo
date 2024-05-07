@@ -11,7 +11,7 @@ jobs:
       (
         startsWith(github.event.issue.title, 'cprc') ||
         startsWith(github.event.issue.title, 'cprelease')
-      )    runs-on: ubuntu-latest
+      )    
     runs-on: ubuntu-latest
 
     steps:
