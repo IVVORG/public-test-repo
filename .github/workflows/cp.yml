@@ -20,15 +20,15 @@ jobs:
             workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             gh issue comment $issue_number --body $workflow_run_url
 
-  cherry-pick:
-    uses: ./.github/workflows/wf-sp.yml
-    with: 
-      org: 'IVVORG'
-      repo: 'public-test-repo'
-      team: 'DevOps_cp'
-      user: '${{ github.event.issue.user.login }}'
-      issue-title: '${{ github.event.issue.title }}'
-      issue-body: '${{ github.event.issue.body }}'
-    secrets:
-      git_token: ${{ secrets.REPOREADING_TOKEN }}
+#  cherry-pick:
+#    uses: ./.github/workflows/wf-sp.yml
+#    with: 
+#      org: 'IVVORG'
+#      repo: 'public-test-repo'
+#      team: 'DevOps_cp'
+#      user: '${{ github.event.issue.user.login }}'
+#      issue-title: '${{ github.event.issue.title }}'
+#      issue-body: '${{ github.event.issue.body }}'
+#    secrets:
+#      git_token: ${{ secrets.REPOREADING_TOKEN }}
 
