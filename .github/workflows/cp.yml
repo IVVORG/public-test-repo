@@ -17,14 +17,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const context = github.context;
-            const issue_number = 414;
-            const workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const body = `This is a comment with a link to the running workflow: [Workflow Run #${context.runNumber}](${workflow_run_url})`;
+            const workflow_run_url = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${github.context.runId}`;
+            const body = `This is a comment with a link to the running workflow: [Workflow Run #${github.context.runNumber}](${workflow_run_url})`;
             await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue_number,
+              owner: github.context.repo.owner,
+              repo: github.context.repo.repo,
+              issue_number: 414,
               body: body
             });
 
