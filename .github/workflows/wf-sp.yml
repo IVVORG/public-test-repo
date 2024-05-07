@@ -75,9 +75,9 @@ jobs:
         run: |
           title="${{ inputs.issue-title }}"
           
-          if [[ "$title" =~ ^(cprc)\ ]]; then
+          if [[ "$title" =~ "^(cprc)\" ]]; then
             branch="rc"
-          elif [[  "$title" =~ ^(cprelease)\  ]]; then
+          elif [[ "$title" =~ "^(cprelease)\" ]]; then
             branch="release"
           else
             echo "Unknown issue title. Aborting."
