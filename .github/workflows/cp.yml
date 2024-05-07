@@ -18,19 +18,20 @@ jobs:
         org: 'IVVORG'
         repo: 'public-test-repo'
         issue: '${{ github.event.issue.number }}'
-        body: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }};
+        body: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
       run: |
         bash ./.github/workflows/add-issue-commit.sh
 
-#  cherry-pick:
-#    uses: ./.github/workflows/wf-sp.yml
-#    with: 
-#      org: 'IVVORG'
-#      repo: 'public-test-repo'
-#      team: 'DevOps_cp'
-#      user: '${{ github.event.issue.user.login }}'
-#      issue-title: '${{ github.event.issue.title }}'
-#      issue-body: '${{ github.event.issue.body }}'
-#    secrets:
-#      git_token: ${{ secrets.REPOREADING_TOKEN }}
+  cherry-pick:
+    needs: add-issue-comment
+    uses: ./.github/workflows/wf-sp.yml
+    with: 
+      org: 'IVVORG'
+      repo: 'public-test-repo'
+      team: 'DevOps_cp'
+      user: '${{ github.event.issue.user.login }}'
+      issue-title: '${{ github.event.issue.title }}'
+      issue-body: '${{ github.event.issue.body }}'
+    secrets:
+      git_token: ${{ secrets.REPOREADING_TOKEN }}
 
