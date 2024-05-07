@@ -16,7 +16,7 @@ done
 echo "commit_hashes: $commit_hashes"
 
 
-if [[ "$branch" != "rc" ]]; then
+if [[ "$branch" == "rc" ]]; then
   orig_branch="main"   
 else
   orig_branch="rc"   
