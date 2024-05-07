@@ -26,10 +26,8 @@ git fetch --all
 for commit_hash in $commit_hashes; do
   # Check if commit exists in current branch
   cmt=$(git branch -r --contains $commit_hash | sed 's/origin\///')
-  echo "cmt1=$cmt"
   cmt=$(echo "$cmt" | sed 's/^[ \t]*//;s/[ \t]*$//')
   echo "cmt2=$cmt"
-   
   if [ -z "$cmt" ]; then
      echo "Commit $commit_hash does not exists"
      exit 1	
