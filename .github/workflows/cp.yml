@@ -1,8 +1,8 @@
 name: Cherry Pick Commits on Issue Creation
 
-on: 
-  issues:
-    types: [opened, reopened]
+on:  [push]
+#  issues:
+#    types: [opened, reopened]
 
 jobs: 
   add-issue-comment:
