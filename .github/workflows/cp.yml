@@ -6,7 +6,7 @@ on: [push]
 
 jobs: 
   add-issue-comment:
-    if: ${{ github.event.issue.title }} == 'cprc' || ${{ github.event.issue.title }} == 'cprelease'
+    if: ${{ github.event.issue.title == 'cprc' || github.event.issue.title == 'cprelease' }}
     runs-on: ubuntu-latest
 
     steps:
