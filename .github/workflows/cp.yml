@@ -12,19 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Add comment to issue
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const workflow_run_url = `https://github.com/IVVORG/public-test-repo/actions/runs/${github.context.runId}`;
-            const body = `This is a comment with a link to the running workflow: [Workflow Run #${github.context.runNumber}](${workflow_run_url})`;
-            await github.rest.issues.createComment({
-              owner: github.context.repo.owner,
-              repo: 'IVVORG',
-              issue_number: 414,
-              body: body
-            });
+      - name: Add comment to cherry pick issue
+        env: 
+          github_token: ${{ secrets.REPOREADING_TOKEN }}
+          GH_TOKEN: : ${{ secrets.REPOREADING_TOKEN }} 
+          org: 'IVVORG'
+          repo: 'public-test-repo'
+          issue: '${{ github.event.issue.id }}'
+          body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+
+        run: |
+          chmod +x ./.github/workflows/add-issue-commit.sh
+          bash ./.github/workflows/add-issue-commit.sh 
 
 #  cherry-pick:
 #    uses: ./.github/workflows/wf-sp.yml

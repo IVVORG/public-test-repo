@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The input is a comma-separated list of commit hashes
-echo "Starting checrry-pick..."
+echo "Starting cherry-pick..."
 if [ -z "$branch" ];  then
   echo "Branch is not defined"
   exit 1
