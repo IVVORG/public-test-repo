@@ -18,7 +18,7 @@ jobs:
         org: 'IVVORG'
         repo: 'public-test-repo'
         issue: '${{ github.event.issue.number }}'
-#        body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+        body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
       run: |
         bash ./.github/workflows/add-issue-commit.sh
 
