@@ -18,7 +18,7 @@ jobs:
 #        body: 'This is a comment with a link to the running workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}';
       run: |
         chmod +x ./.github/workflows/add-issue-commit.sh
-        bash ./.github/workflows/add-issue-commit.sh 
+        bash ./.github/workflows/add-issue-commit.sh
 
 #  cherry-pick:
 #    uses: ./.github/workflows/wf-sp.yml
