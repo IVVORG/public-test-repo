@@ -15,7 +15,6 @@ for word in $commit_hashes_arr; do
 done
 echo "commit_hashes: $commit_hashes"
 
-
 if [[ "$branch" == "rc" ]]; then
   orig_branch="main"   
 else
@@ -24,9 +23,9 @@ fi
 echo "orig_branch: $orig_branch"
 
 git fetch --all
-for commit_hash in $sorted_commits; do
+for commit_hash in $commit_hashes; do
   # Check if commit exists in current branch
-  cmt=$(git branch -r --contains  | sed 's/origin\///')
+  cmt=$(git branch -r --contains $commit_hash | sed 's/origin\///')
   echo "cmt1=$cmt"
   cmt=$(echo "$cmt" | sed 's/^[ \t]*//;s/[ \t]*$//')
   echo "cmt2=$cmt"
