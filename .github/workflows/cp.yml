@@ -41,3 +41,15 @@ jobs:
     secrets:
       git_token: ${{ secrets.REPOREADING_TOKEN }}
 
+  close-issue:
+    needs: cherry-pick
+    steps:
+    - name: Close issue 
+      env: 
+        GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
+        org: 'IVVORG'
+        repo: 'public-test-repo'
+        issue: '${{ github.event.issue.number }}'
+      run: |
+        bash ./.github/workflows/close-issue.sh
+
