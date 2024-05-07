@@ -17,19 +17,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // The GitHub context object contains useful information about the current workflow
             const context = github.context;
-
-            // Specify the issue number you want to comment on
             const issue_number = 414;
-
-            // Construct the workflow run URL
             const workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-
-            // Create the comment content
             const body = `This is a comment with a link to the running workflow: [Workflow Run #${context.runNumber}](${workflow_run_url})`;
-
-            // Add a comment to the specified issue
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
