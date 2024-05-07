@@ -45,6 +45,10 @@ jobs:
     needs: cherry-pick
     runs-on: ubuntu-latest
     steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Close issue 
       env: 
         GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
