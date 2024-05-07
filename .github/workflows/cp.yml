@@ -6,6 +6,22 @@ on:
 
 jobs:
 
+  add-issue-comment:
+    # Use GitHub Script to add a comment
+    - name: Add comment to issue
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const issue_number = ${{ github.event.issue.id }};
+          const workflow_run_url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+          const body = `See workflow: [#${context.runNumber}](${workflow_run_url})`;
+          await github.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number,
+            body
+          });
   cherry-pick:
     uses: ./.github/workflows/wf-sp.yml
     with: 
