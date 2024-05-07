@@ -17,11 +17,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const workflow_run_url = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${github.context.runId}`;
+            const workflow_run_url = `https://github.com/IVVORG/public-test-repo/actions/runs/${github.context.runId}`;
             const body = `This is a comment with a link to the running workflow: [Workflow Run #${github.context.runNumber}](${workflow_run_url})`;
             await github.rest.issues.createComment({
               owner: github.context.repo.owner,
-              repo: github.context.repo.repo,
+              repo: 'IVVORG',
               issue_number: 414,
               body: body
             });
