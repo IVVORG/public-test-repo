@@ -21,6 +21,7 @@ if [[ "$branch" != "rc" ]]; then
 else
   orig_branch="rc"   
 fi
+echo "orig_branch: $orig_branch"
 
 git fetch --all
 for commit_hash in $sorted_commits; do
@@ -29,11 +30,13 @@ for commit_hash in $sorted_commits; do
   cmt=$(echo "$commit_hash" | sed 's/^[ \t]*//;s/[ \t]*$//')
   if [ -z "$cmt" ]; then
      echo "Commit $commit_hash does not exists"
+     exit 1	
   fi 
   if [[ "$cmt" != "$orig_branch" ]]; then
      echo "Commit $commit_hash does not belong to original branch $orig_branch"
+     exit 1	
   fi 
-fi
+done
 
 git clone -b $branch "https://github.com/$org/$repo" chp || {
    echo "Something wnet wrong with clone branch"
