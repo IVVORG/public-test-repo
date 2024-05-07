@@ -2,12 +2,16 @@ name: Cherry Pick Commits on Issue Creation
 
 on:  
   issues:
-    types: [opened, reopened]
+    types: [opened, edited]
 
 jobs: 
   add-issue-comment:
-    runs-on: ubuntu-latest
-
+    if: |
+      github.event.issue.title != '' &&
+      (
+        startsWith(github.event.issue.title, 'cprc') ||
+        startsWith(github.event.issue.title, 'cprelease')
+      )    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
