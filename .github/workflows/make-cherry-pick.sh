@@ -53,6 +53,8 @@ done | sort | awk '{print $4}')
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 echo "The script directory is: $SCRIPT_DIR"
 # Process each sorted commit hash separately
+git config --local user.email "v.istratenko@dev.untill.com"
+git config --local user.name "upload-robot"
 for commit_hash in $sorted_commits; do
     echo "Cherry-picking commit $commit_hash from main to $branch..."
     echo $(git show -s --format=%ci $commit_hash) $commit_hash	
@@ -63,6 +65,7 @@ for commit_hash in $sorted_commits; do
         exit 1
     }
 done
+git config --global url.https://$github_token@github.com/.insteadOf https://github.com/
 git push origin $rc
 
 echo "Cherry-pick completed successfully."
