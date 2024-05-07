@@ -74,9 +74,10 @@ jobs:
         id: set_branch
         run: |
           title="${{ inputs.issue-title }}"
-          if [[ "$title" == "cprc" ]]; then
+          
+          if [[ startsWith($title, 'cprc') ]]; then
             branch="rc"
-          elif [[ "$title" == "cprelease" ]]; then
+          elif [[ startsWith($title, 'cprelease' ]]; then
             branch="release"
           else
             echo "Unknown issue title. Aborting."
