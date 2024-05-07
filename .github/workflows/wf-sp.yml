@@ -27,7 +27,6 @@ on:
 
 jobs:
   cherry_pick:
-    if: inputs.issue-title == 'cprc' || inputs.issue-title == 'cprelease'
     runs-on: ubuntu-latest
 
     steps:
