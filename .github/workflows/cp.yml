@@ -29,7 +29,7 @@ jobs:
 
   cherry-pick:
     needs: add-issue-comment
-    uses: untillpro/ci-action/.github/workflows/wf_cp.yml@master
+    uses: untillpro/ci-action/.github/workflows/cp.yml@master
 
     with: 
       org: 'IVVORG'
