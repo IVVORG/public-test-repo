@@ -5,15 +5,14 @@ on:
     types: [opened]
 
 jobs: 
-
   cherry-pick:
+    runs-on: ubuntu-latest
     if: |
       github.event.issue.title != '' &&
       (
         startsWith(github.event.issue.title, 'cprc') ||
         startsWith(github.event.issue.title, 'cprelease')
       )    
-    runs-on: ubuntu-latest
     uses: untillpro/ci-action/.github/workflows/cp.yml@master
     with: 
       org: 'IVVORG'
