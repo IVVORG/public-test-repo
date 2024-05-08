@@ -29,7 +29,8 @@ jobs:
 
   cherry-pick:
     needs: add-issue-comment
-    uses: ./.github/workflows/wf-sp.yml
+    uses: untillpro/ci-action/.github/workflows/wf_cp.yml@master
+
     with: 
       org: 'IVVORG'
       repo: 'public-test-repo'
