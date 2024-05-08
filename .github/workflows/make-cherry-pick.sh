@@ -20,7 +20,7 @@ if [[ "$branch" == "rc" ]]; then
 else
   orig_branch="rc"   
 fi
-echo "orig_branch: $orig_branch"
+echo "original branch: $orig_branch"
 
 git fetch --all
 for commit_hash in $commit_hashes; do
@@ -65,7 +65,6 @@ fi
 
 # Initialize a space-separated string to hold sorted commit hashes
 sorted_commits=""
-
 # Loop through the hashes, get their commit dates, and sort them
 # Capture the sorted hashes into a string variable
 sorted_commits=$(for commit in $commit_hashes; do
