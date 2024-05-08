@@ -25,8 +25,7 @@ jobs:
         repo: 'public-test-repo'
         issue: '${{ github.event.issue.number }}'
         body: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      run: |
-        bash ./.github/workflows/add-issue-commit.sh
+      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/add-issue-commit.sh | bash 
 
   cherry-pick:
     needs: add-issue-comment
@@ -55,6 +54,5 @@ jobs:
         org: 'IVVORG'
         repo: 'public-test-repo'
         issue: '${{ github.event.issue.number }}'
-      run: |
-        bash ./.github/workflows/close-issue.sh
+      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/close-issue.sh | bash 
 
