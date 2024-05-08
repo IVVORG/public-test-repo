@@ -5,7 +5,8 @@ on:
     types: [opened]
 
 jobs: 
-  add-issue-comment:
+
+  cherry-pick:
     if: |
       github.event.issue.title != '' &&
       (
@@ -13,47 +14,15 @@ jobs:
         startsWith(github.event.issue.title, 'cprelease')
       )    
     runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Create issue comment
-      env: 
-        GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
-        org: 'IVVORG'
-        repo: 'public-test-repo'
-        issue: '${{ github.event.issue.number }}'
-        body: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/add-issue-commit.sh | bash 
-
-  cherry-pick:
-    needs: add-issue-comment
     uses: untillpro/ci-action/.github/workflows/cp.yml@master
-
     with: 
       org: 'IVVORG'
       repo: 'public-test-repo'
       team: 'DevOps_cp'
       user: '${{ github.event.issue.user.login }}'
+      issue: '${{ github.event.issue.number }}'
       issue-title: '${{ github.event.issue.title }}'
       issue-body: '${{ github.event.issue.body }}'
     secrets:
       git_token: ${{ secrets.REPOREADING_TOKEN }}
-
-  close-issue:
-    needs: cherry-pick
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Close issue 
-      env: 
-        GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }} 
-        org: 'IVVORG'
-        repo: 'public-test-repo'
-        issue: '${{ github.event.issue.number }}'
-      run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/close-issue.sh | bash 
 
