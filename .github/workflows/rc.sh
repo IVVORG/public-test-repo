@@ -30,7 +30,8 @@ git checkout $source_branch
 git pull origin $source_branch
 git checkout -b $new_branch
 git switch $new_branch
-git commit -am "Updated dependencies in go.mod"
+git commit -am "Release candidate create"
+git push origin rc
 cd ..
 
 echo "Branch 'github.com/$org/$repo $new_branch' has been created from 'github.com/$org/$repo $source_branch' and pushed to origin."
