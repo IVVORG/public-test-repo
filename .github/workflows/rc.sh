@@ -22,6 +22,9 @@ if git branch -r | grep -qE "origin/$new_branch$"; then
 fi
 
 # Create new branch from the source branch
+git config --local user.email "v.istratenko@dev.untill.com"
+git config --local user.name "upload-robot"
+
 git fetch origin
 git checkout $source_branch
 git pull origin $source_branch
