@@ -83,7 +83,7 @@ jobs:
           GH_TOKEN: ${{ secrets.git_token }}
           org: ${{ inputs.org }}
           repo: ${{ inputs.repo }}
-        run: curl -s ./.github/workflows/rc.sh | bash 
+        run: ./.github/workflows/rc.sh
 
 
       - name: Close issue 
