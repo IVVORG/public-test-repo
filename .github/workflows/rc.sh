@@ -1,12 +1,5 @@
 #!/bin/bash
 
-echo "Create rc: org: $org, repo: $repo"
-# Check if the parameter is provided and valid
-if [[ $# -ne 2 ]] ; then
-    echo "Error: Invalid argument. Please provide 'org' and 'repo' as an argument."
-    exit 1
-fi
-
 echo "Clone https://github.com/$org/$repo"
 git clone https://github.com/$org/$repo repo
 cd repo
