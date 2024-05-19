@@ -84,8 +84,11 @@ jobs:
           org: ${{ inputs.org }}
           repo: ${{ inputs.repo }}
         run: |
-           chmod +x ./.github/workflows/rc.sh
-           bash ./.github/workflows/rc.sh
+          git config --local user.email "v.istratenko@dev.untill.com"
+          git config --local user.name "upload-robot"
+          git config --global url.https://${{ secrets.git_token }}@github.com/.insteadOf https://github.com/
+          chmod +x ./.github/workflows/rc.sh
+          bash ./.github/workflows/rc.sh
 
       - name: Close issue 
         env: 
