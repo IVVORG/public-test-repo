@@ -84,7 +84,7 @@ jobs:
           org: ${{ inputs.org }}
           repo: ${{ inputs.repo }}
         run: ./.github/workflows/rc.sh
-
+        shell: bash	
 
       - name: Close issue 
         env: 
@@ -93,3 +93,4 @@ jobs:
           repo: ${{ inputs.repo }}
           issue: ${{ inputs.issue }}
         run: curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/close-issue.sh | bash 
+
