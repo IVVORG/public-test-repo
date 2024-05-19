@@ -17,6 +17,7 @@ jobs:
       repo: 'public-test-repo'
       team: 'DevOps_cp'
       user: '${{ github.event.issue.user.login }}'
+      issue: '${{ github.event.issue.number }}'
     secrets:
       git_token: ${{ secrets.REPOREADING_TOKEN }}
 

@@ -15,6 +15,9 @@ on:
       user:
         required: true
         type: string
+      issue:
+        required: true 
+        type: string
     secrets:
       git_token:	
         required: true
