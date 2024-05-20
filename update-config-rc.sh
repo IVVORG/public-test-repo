@@ -3,7 +3,7 @@
 repoHasRC() {
   # Get tag last value
   org="untillpro"
-  repo=$2
+  repo=$1
 
   tagvalue=""
   header="Accept: application/vnd.github+json"
@@ -11,7 +11,7 @@ repoHasRC() {
   TAGS=$(curl -s "$repo_full_name/tags" | jq -r '.[].name')
   # Filter tags with the specified prefix and postfix
   TAG_PREFIX="v0."
-  TAG_POSTFIX=".1-rc"
+  TAG_POSTFIX="-rc"
   tagvalue=$(echo "$TAGS" | grep "^$TAG_PREFIX.*$TAG_POSTFIX$")
 
   if [ -z "$tagvalue" ]; then
@@ -20,9 +20,8 @@ repoHasRC() {
   else
     echo "Last release candidate tag for repo github.com/${org}/${repo} is tagvalue"
   fi
-  # Remove prefix 'v0.' and postfix '.1-rc'
-  stripped_tagvalue=${tagvalue#v0.}
-  strdate=${stripped_tagvalue%.1-rc}
+  # Remove prefix 'v0.' and postfix '.1*-rc'
+  strdate=$(echo "$tagvalue" | sed -E 's/^v0\.([0-9]+)\.[0-9]+[pt]-rc$/\1/') 
 
   # Print the result
   echo "The last rc tag date is: $strdate"
@@ -52,7 +51,11 @@ repoHasRC() {
 }
 
 updateSync() {
+
   reptag="created"
+  pack=$1
+  tagvalue="$2"
+
   packfound=0
   while read -r line; do
     i=$((i+1))
@@ -82,24 +85,24 @@ if [[ $bp3tag == "1" ]]; then
     echo "New rc tag for airs-bp3 does not exist"
     exit 1
 fi
-botag=$(repoHasRC "airc-backoffice2" "resellerportal")
+botag=$(repoHasRC "airc-backoffice2" "backoffice2")
 if [[ $botag == "1" ]]; then
     echo "New rc tag for airc-backoffice2 does not exist"
     exit 1
 fi
-portaltag=$(repoHasRC "web-portals" "resellerportal")
+rportaltag=$(repoHasRC "web-portals" "resellerportal")
 if [[ $portaltag == "1" ]]; then
     echo "New rc tag for resellerportal does not exist"
     exit 1
 fi
-portaltag=$(repoHasRC "web-portals" "paymentsportal")
+pportaltag=$(repoHasRC "web-portals" "paymentsportal")
 if [[ $portaltag == "1" ]]; then
     echo "New rc tag for paymentsportal does not exist"
     exit 1
 fi
 
-updateSync $bp3tag
-updateSync $botag
-updateSync $portaltag
-
+updateSync "bp3", $bp3tag
+updateSync "backoffice2", $botag
+updateSync "resellerportal", $rportaltag
+updateSync "paymentsportal", $pportaltag
 
