@@ -21,3 +21,18 @@ jobs:
     secrets:
       git_token: ${{ secrets.REPOREADING_TOKEN }}
 
+  handle-failure:
+    needs: make-rc
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Add comment to issue
+        env: 
+          GH_TOKEN: ${{ secrets.REPOREADING_TOKEN }}
+          org: 'IVVORG'
+          repo: 'public-test-repo'
+          user: '${{ github.event.issue.user.login }}'
+          issue: '${{ github.event.issue.number }}'
+          body: "Error occured"
+        run: |
+          curl -s https://raw.githubusercontent.com/untillpro/ci-action/master/scripts/add-issue-commit.sh | bash 
