@@ -1,13 +1,18 @@
-name: Release at 5 at the morning
+name: Release at 5 in the morning
 
 on: 
   schedule:
-    - cron: '0 3 * * 0'
+    - cron: '0 3 * * 0' # This runs the workflow weekly at 3:00 GMT on Sunday
   workflow_dispatch:
   
 jobs:
   check_issue:
     runs-on: ubuntu-latest
+    outputs:
+      user_login: ${{ steps.issue.outputs.user_login }}
+      issue_number: ${{ steps.issue.outputs.issue_number }}
+      issue_title: ${{ steps.issue.outputs.issue_title }}
+      issue_body: ${{ steps.issue.outputs.issue_body }}
     steps:
     - name: Check for cprelease issue
       id: issue
@@ -22,31 +27,25 @@ jobs:
           });
           const issue = issues.data.find(issue => issue.title === 'cprelease');
           if (issue) {
-            return {
-              user_login: issue.user.login,
-              issue_number: issue.number,
-              issue_title: issue.title,
-              issue_body: issue.body
-            };
+            core.setOutput('user_login', issue.user.login);
+            core.setOutput('issue_number', issue.number);
+            core.setOutput('issue_title', issue.title);
+            core.setOutput('issue_body', issue.body);
           } else {
-            return null;
+            core.setFailed('No issue with title "cprelease" found.');
           }
-        result-encoding: string
 
   cherry_pick:
-    if: steps.issue.outputs.result != null
     needs: check_issue
-    runs-on: ubuntu-latest
-    steps:
-    - name: Cherry-pick the issue
-      uses: untillpro/ci-action/.github/workflows/cp.yml@master
-      with: 
-        org: 'ivvorg'
-        repo: 'public-test-repo'
-        team: 'DevOps_cp'
-        user: '${{ fromJson(needs.check_issue.outputs.result).user_login }}'
-        issue: '${{ fromJson(needs.check_issue.outputs.result).issue_number }}'
-        issue-title: '${{ fromJson(needs.check_issue.outputs.result).issue_title }}'
-        issue-body: '${{ fromJson(needs.check_issue.outputs.result).issue_body }}'
-      secrets:
-        git_token: ${{ secrets.REPOREADING_TOKEN }}
+    if: needs.check_issue.result == 'success'
+    uses: untillpro/ci-action/.github/workflows/cp.yml@master
+    with: 
+      org: 'ivvorg'
+      repo: 'public-test-repo'
+      team: 'DevOps_cp'
+      user: ${{ needs.check_issue.outputs.user_login }}
+      issue: ${{ needs.check_issue.outputs.issue_number }}
+      issue-title: ${{ needs.check_issue.outputs.issue_title }}
+      issue-body: ${{ needs.check_issue.outputs.issue_body }}
+    secrets:
+      git_token: ${{ secrets.REPOREADING_TOKEN }}
