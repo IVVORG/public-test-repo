@@ -15,7 +15,7 @@ jobs:
     with: 
       org: 'IVVORG'
       repo: 'public-test-repo'
-      team: 'DevOps_release'
+      team: 'DevOps_cp'
       user: '${{ github.event.issue.user.login }}'
       issue: '${{ github.event.issue.number }}'
     secrets:
