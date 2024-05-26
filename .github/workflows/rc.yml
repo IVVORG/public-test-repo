@@ -1,0 +1,23 @@
+name: Make release candidate
+
+on:  
+  issues:
+    types: [opened]
+
+jobs: 
+  make-rc:
+    if: |
+      github.event.issue.title != '' &&
+      (
+        startsWith(github.event.issue.title, 'rc') 
+      )    
+    uses: untillpro/ci-action/.github/workflows/rc.yml@master
+    with: 
+      org: 'IVVORG'
+      repo: 'public-test-repo'
+      team: 'DevOps_release'
+      user: '${{ github.event.issue.user.login }}'
+      issue: '${{ github.event.issue.number }}'
+    secrets:
+      git_token: ${{ secrets.REPOREADING_TOKEN }}
+
