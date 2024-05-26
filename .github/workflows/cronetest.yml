@@ -1,38 +1,54 @@
-name: Release every 2 weeks on Monday at 5 at the morning
+name: Check cherry-pick to release every day at 5 at the morning
 
 on: 
   schedule:
-    - cron: '31 7 * * *'
+    - cron: '0 3 * * *'
+   workflow_dispatch:
 
 jobs:
   
-  build:
-    name: Build
+jobs:
+  check_issue:
     runs-on: ubuntu-latest
     steps:
+    - name: Check for cprelease issue
+      id: issue
+      uses: actions/github-script@v3
+      with:
+        script: |
+          const issues = await github.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            per_page: 100
+          });
+          const issue = issues.data.find(issue => issue.title === 'cprelease');
+          if (issue) {
+            return {
+              user_login: issue.user.login,
+              issue_number: issue.number,
+              issue_title: issue.title,
+              issue_body: issue.body
+            };
+          } else {
+            return null;
+          }
+        result-encoding: string
 
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Check week number
-      id: check_week
-      run: |
-        week_num=$(date +'%V')
-        declare -i wnum
-        wnum=$((10#${week_num}))
-        echo "Week number: $wnum"
-        if [ $((wnum % 2)) -eq 0 ]; then
-          echo "RUN_THIS_WEEK=true" >> $GITHUB_ENV
-        else
-          echo "RUN_THIS_WEEK=false" >> $GITHUB_ENV
-        fi
-
-    - name: Worked
-      if: env.RUN_THIS_WEEK == 'true'
-      run: |
-         echo 'Worked'
-
-    - name: Not worked
-      if: env.RUN_THIS_WEEK == 'false'
-      run: |
-         echo 'Not Worked'
+  cherry_pick:
+    if: steps.issue.outputs.result != null
+    needs: check_issue
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cherry-pick the issue
+      uses: untillpro/ci-action/.github/workflows/cp.yml@master
+      with: 
+        org: 'ivvorg'
+        repo: 'public-test-repo'
+        team: 'DevOps_cp'
+        user: '${{ fromJson(needs.check_issue.outputs.result).user_login }}'
+        issue: '${{ fromJson(needs.check_issue.outputs.result).issue_number }}'
+        issue-title: '${{ fromJson(needs.check_issue.outputs.result).issue_title }}'
+        issue-body: '${{ fromJson(needs.check_issue.outputs.result).issue_body }}'
+      secrets:
+        git_token: ${{ secrets.REPOREADING_TOKEN }}
