@@ -9,8 +9,7 @@ jobs:
     if: |
       github.event.issue.title != '' &&
       (
-        startsWith(github.event.issue.title, 'cprc') ||
-        startsWith(github.event.issue.title, 'cprelease')
+        startsWith(github.event.issue.title, 'cprc')
       )    
     uses: untillpro/ci-action/.github/workflows/cp.yml@master
     with: 
