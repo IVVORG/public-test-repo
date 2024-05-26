@@ -1,9 +1,9 @@
-name: Check cherry-pick to release every day at 5 at the morning
+name: Release at 5 at the morning
 
 on: 
   schedule:
-    - cron: '0 3 * * *'
-   workflow_dispatch:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
 
 jobs:
   
