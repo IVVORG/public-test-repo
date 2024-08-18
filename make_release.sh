@@ -45,3 +45,4 @@ git checkout -b $new_branch
 git push -u origin $new_branch
 
 echo "Branch '$new_branch' has been created from '$source_branch' and pushed to origin."
+
